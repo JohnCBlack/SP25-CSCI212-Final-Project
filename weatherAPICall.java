@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class weatherAPICall {
-    private static String baseURL = "https://api.openweathermap.org/data/3.0/onecall?lat=";
+    private static final String baseURL = "https://api.openweathermap.org/data/3.0/onecall?lat=";
     //private static String apiKey = System.getenv("WEATHER_API_KEY");
-    private static String apiKey = "3b5cab548e03ced54fb15d02aa3441d7";
+    private static final String apiKey = "";
 
     public static void main(String[] args) {
         //String[2] = [lat, lon]
