@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class weatherAPICall {
-    private static final String baseURL = "https://api.openweathermap.org/data/3.0/onecall?lat=";
+    //private static final String baseURL = "https://api.openweathermap.org/data/3.0/onecall?lat=";
     //private static String apiKey = System.getenv("WEATHER_API_KEY");
-    private static final String apiKey = "";
+
 
     public static void main(String[] args) {
         //String[2] = [lat, lon]
@@ -21,15 +21,10 @@ public class weatherAPICall {
     }
 
     public static void getWeather(String lat, String lon) {
-        //https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-        /*
-        current
-        minutely
-        hourly
-        daily
-        alerts
-         */
-        String urlStr = String.format("%s%s&lon=%s&exclude=hourly,daily,alerts&appid=%s", baseURL, lat, lon, apiKey);
+        final String baseURL= "https://api.weatherapi.com/v1/current.json?key=";
+
+        //http://api.weatherapi.com/v1/current.json?key=e0687018d39a48d1a25130036251704&q=46032&aqi=no
+        String urlStr = String.format("%s%s&q=%s,%s&aqi=no", baseURL, weatherApiKey, lat, lon);
 
         try {
             URL url = new URI(urlStr).toURL();
@@ -69,7 +64,7 @@ public class weatherAPICall {
         String zipCode = sc.next();
 
         //http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}
-        String urlStr = String.format("http://api.openweathermap.org/geo/1.0/zip?zip=%s,US&appid=%s", zipCode, apiKey);
+        String urlStr = String.format("https://api.openweathermap.org/geo/1.0/zip?zip=%s,US&appid=%s", zipCode, geoApiKey);
 
         try {
             URL url = new URI(urlStr).toURL();
@@ -87,12 +82,11 @@ public class weatherAPICall {
                     informationString.append(scanner.nextLine());
                 }
 
-                scanner.close();
-
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
                 location[0] = jsonObject.get("lat").toString();
                 location[1] = jsonObject.get("lon").toString();
+
             } else {
                 System.out.println("Response Code: " + responseCode);
                 System.out.println("Error in Geolocation API call");
