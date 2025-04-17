@@ -1,0 +1,59 @@
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.util.Scanner;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+public class StockFetcher {
+    private static final String API_KEY = "75RDDOB8ANQTT6AE";
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
+        String symbol = sc.next().toUpperCase();
+
+        getStockData(symbol);
+    }
+
+    public static void getStockData(String symbol) {
+        String urlStr = String.format(
+            "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=%s",
+            symbol, API_KEY
+        );
+
+        try {
+            URL url = new URI(urlStr).toURL();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == 200) {
+                Scanner scanner = new Scanner(url.openStream());
+                StringBuilder responseBuilder = new StringBuilder();
+
+                while (scanner.hasNext()) {
+                    responseBuilder.append(scanner.nextLine());
+                }
+
+                scanner.close();
+
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(responseBuilder.toString());
+
+                // Print the raw JSON
+                System.out.println(jsonObject.toJSONString());
+            } else {
+                System.out.println("Response Code: " + responseCode);
+                System.out.println("Error fetching stock data.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+        }
+    }
+}
