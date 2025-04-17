@@ -10,11 +10,6 @@ import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Scanner;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Properties;
-
 public class weatherAPICall {
     private static String weatherApiKey;
 
