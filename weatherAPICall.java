@@ -1,20 +1,47 @@
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.Scanner;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
+
 public class weatherAPICall {
-    private static final String weatherApiKey = "";
+    private static String weatherApiKey;
 
     String zipCode;
     float currentTemp;
 
     public weatherAPICall() {
         /* Format
-        String[2] = [lat, lon]
+
         */
+
+        // Set Api key
+        if (weatherApiKey == null) {
+            System.out.println("Setting API Key");
+
+            var props = new Properties();
+            var envFile = Paths.get("config.env");
+            try {
+                try (var inputStream = Files.newInputStream(envFile)) {
+                    props.load(inputStream);
+                }
+                weatherApiKey = (String) props.get("WEATHER_API_KEY");
+            } catch (IOException e) {
+                System.out.println("Error reading config.env in WeatherAPICall");
+                throw new RuntimeException(e);
+            }
+        }
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the your zip code: ");
