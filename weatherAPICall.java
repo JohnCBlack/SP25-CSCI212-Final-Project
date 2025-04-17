@@ -1,6 +1,5 @@
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -9,14 +8,17 @@ import java.util.Scanner;
 public class weatherAPICall {
     private static final String weatherApiKey = "";
 
-    public static void main(String[] args) {
+    String zipCode;
+    float currentTemp;
+
+    public weatherAPICall() {
         /* Format
         String[2] = [lat, lon]
         */
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the your zip code: ");
-        String zipCode = sc.next();
+        this.zipCode = sc.next();
 
         getWeather(zipCode);
     }
