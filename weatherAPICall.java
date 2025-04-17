@@ -22,21 +22,7 @@ public class weatherAPICall {
         */
 
         // Set Api key
-        if (weatherApiKey == null) {
-            System.out.println("Setting API Key");
-
-            var props = new Properties();
-            var envFile = Paths.get("config.env");
-            try {
-                try (var inputStream = Files.newInputStream(envFile)) {
-                    props.load(inputStream);
-                }
-                weatherApiKey = (String) props.get("WEATHER_API_KEY");
-            } catch (IOException e) {
-                System.out.println("Error reading config.env in WeatherAPICall");
-                throw new RuntimeException(e);
-            }
-        }
+        setApiKey();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the your zip code: ");
@@ -78,6 +64,25 @@ public class weatherAPICall {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void setApiKey() {
+        if (weatherApiKey == null) {
+            System.out.println("Setting API Key");
+
+            var props = new Properties();
+            var envFile = Paths.get("config.env");
+            try {
+                try (var inputStream = Files.newInputStream(envFile)) {
+                    props.load(inputStream);
+                }
+
+                weatherApiKey = (String) props.get("WEATHER_API_KEY");
+            } catch (IOException e) {
+                System.out.println("Error reading config.env in WeatherAPICall");
+                throw new RuntimeException(e);
+            }
         }
     }
 }
