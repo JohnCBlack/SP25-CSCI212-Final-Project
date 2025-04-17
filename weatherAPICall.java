@@ -85,4 +85,11 @@ public class weatherAPICall {
             }
         }
     }
+
+    // Getters and Setters
+    public void setCurrentTemp(float currentTemp) {
+        this.currentTemp = currentTemp;
+    } public float getCurrentTemp() {
+        return this.currentTemp;
+    }
 }
