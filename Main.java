@@ -23,14 +23,32 @@ public class Main {
         dropdown.addActionListener(e -> {
             String selectedOption = (String) dropdown.getSelectedItem();
             // Perform actions based on selected option
-            if (selectedOption.equals("Option 1")) {
-                // Perform action for Option 1
-            } else if (selectedOption.equals("Option 2")) {
-                // Perform action for Option 2
-            } else if (selectedOption.equals("Option 3")) {
+            switch (selectedOption) {
+                case "Option 1" -> {
+                    // Perform action for Option 1
+                }
+                case "Option 2" -> {
+                    // Perform action for Option 2
+                }
+                case "Option 3" -> {
+                }
                 // Perform action for Option 3
             }
         });
+
+        // Add text field for user zip code
+        JTextField zipCodeField = new JTextField(10);
+        zipCodeField.setToolTipText("Enter your zip code");
+
+        // Add action listener to zip code field
+        zipCodeField.addActionListener(e -> {
+            String zipCode = zipCodeField.getText();
+            // Perform actions based on zip code
+        });
+
+        // Add label for zip code field
+        JLabel zipCodeLabel = new JLabel("Zip Code:");
+        zipCodeLabel.setLabelFor(zipCodeField);
 
         // Create continue button
         JButton continueButton = new JButton("Continue");
@@ -45,6 +63,8 @@ public class Main {
         frame.add(messageLabel);
         frame.add(sourceLabel);
         frame.add(dropdown);
+        frame.add(zipCodeLabel);
+        frame.add(zipCodeField);
         frame.add(continueButton);
 
         // Configure frame
