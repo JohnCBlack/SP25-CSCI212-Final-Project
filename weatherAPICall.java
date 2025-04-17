@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class weatherAPICall {
     private static String weatherApiKey;
+    private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
     String zipCode;
     float currentTemp;
@@ -24,6 +25,7 @@ public class weatherAPICall {
         // Set Api key
         setApiKey();
 
+        // Set zipcode for user
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the your zip code: ");
         this.zipCode = sc.next();
@@ -32,10 +34,11 @@ public class weatherAPICall {
     }
 
     public static void getWeather(String zipcode) {
-        final String baseURL= "https://api.weatherapi.com/v1/current.json?key=";
+        //TODO: return an array
 
-        //http://api.weatherapi.com/v1/current.json?key=e0687018d39a48d1a25130036251704&q=46032&aqi=no
-        String urlStr = String.format("%s%s&q=%s&aqi=no", baseURL, weatherApiKey, zipcode);
+        String[] outputArr = new String[0];
+        
+        String urlStr = String.format("%s%s&q=%s&days=1&aqi=no&alerts=no", baseURL, weatherApiKey, zipcode);
 
         try {
             URL url = new URI(urlStr).toURL();
@@ -56,14 +59,23 @@ public class weatherAPICall {
                 scanner.close();
 
                 JSONParser parser = new JSONParser();
-                JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
-                System.out.println(jsonObject.toJSONString());
+                JSONObject inputStream = (JSONObject) parser.parse(informationString.toString());
+                JSONObject currentStream = (JSONObject) inputStream.get("current");
+                JSONObject dayForecastStream = (JSONObject) ((JSONObject) inputStream.get("forecast")).get("forecastday");
+
+                System.out.println(dayForecastStream.toJSONString());
+
+                System.out.println("Current temperature: " + currentStream.get("temp_f"));
+
+
             } else {
                 System.out.println("Response Code: " + responseCode);
                 System.out.println("Error in Weather API call");
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
         }
     }
 
