@@ -2,4 +2,4 @@
 Final project for CSCI212
 
 TODO:
-- Find new API and switch (new weather API can take zip codes and does not require the Geolocator API)
+- Convert weather API call into a proper class that holds current location data
