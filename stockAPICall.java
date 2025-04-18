@@ -69,6 +69,7 @@ public class stockAPICall {
             }
 
         } catch (Exception e) {
+            System.out.println("Error at stock API call...");
             System.out.println("Exception occurred: " + e.getMessage());
         }
     }
@@ -92,7 +93,7 @@ public class stockAPICall {
 
                 stockApiKey = (String) props.get("STOCK_API_KEY");
             } catch (IOException e) {
-                System.out.println("Error reading config.env in WeatherAPICall");
+                System.out.println("Error reading config.env in stockAPICall");
                 throw new RuntimeException(e);
             }
         }
