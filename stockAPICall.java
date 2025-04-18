@@ -10,7 +10,7 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class StockFetcher {
+public class stockAPICall {
     private static String stockApiKey;
 
     public static void main(String[] args) {
