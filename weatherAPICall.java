@@ -15,15 +15,10 @@ public class weatherAPICall {
     private static String weatherApiKey;
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
-    String zipCode;
+    String zipCode, condition;
     float currentTemp, maxTemp, minTemp, changeOfRain;
-    String condition;
 
     public weatherAPICall() {
-        /* Format
-
-        */
-
         // Set Api key
         setApiKey();
 
@@ -35,11 +30,7 @@ public class weatherAPICall {
         getWeather(zipCode);
     }
 
-    public static void getWeather(String zipcode) {
-        //TODO: return an array
-
-        String[] outputArr = new String[0];
-        
+    public void getWeather(String zipcode) {
         String urlStr = String.format("%s%s&q=%s&days=1&aqi=no&alerts=no", baseURL, weatherApiKey, zipcode);
 
         try {
@@ -65,9 +56,14 @@ public class weatherAPICall {
                 JSONObject currentStream = (JSONObject) inputStream.get("current");
                 JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) inputStream.get("forecast")).get("forecastday")).getFirst()).get("day");
 
-                System.out.println(dayForecast.get("maxtemp_f"));
+                // Current stream
+                setCurrentTemp(Float.parseFloat(currentStream.get("temp_f").toString()));
+                setCondition(((JSONObject) (currentStream.get("condition"))).get("text").toString());
 
-                System.out.println("Current temperature: " + currentStream.get("temp_f"));
+                //dayForecast
+                setMaxTemp(Float.parseFloat(dayForecast.get("maxtemp_f").toString()));
+                setMinTemp(Float.parseFloat(dayForecast.get("mintemp_f").toString()));
+                setChangeOfRain(Float.parseFloat(dayForecast.get("daily_chance_of_rain").toString()));
 
 
             } else {
@@ -106,4 +102,27 @@ public class weatherAPICall {
     } public float getCurrentTemp() {
         return this.currentTemp;
     }
+    public void setMaxTemp(float maxTemp) {
+        this.maxTemp = maxTemp;
+    } public float getMaxTemp() {
+        return this.maxTemp;
+    }
+    public void setMinTemp(float minTemp) {
+        this.minTemp = minTemp;
+    } public float getMinTemp() {
+        return this.minTemp;
+    }
+
+    public void setChangeOfRain(float changeOfRain) {
+        this.changeOfRain = changeOfRain;
+    } public float getChangeOfRain() {
+        return this.changeOfRain;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    } public String getCondition() {
+        return this.condition;
+    }
+
 }
