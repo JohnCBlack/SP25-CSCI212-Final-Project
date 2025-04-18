@@ -15,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 /*
 * TODO: In order to retrieve information from this API the key will be today's date in YYYY-MM-DD format
 *  The math for the percentage gained/lost will need to then be calculated manually
+*  currentDate might be better as a static var
 * */
 
 public class stockAPICall {
@@ -25,7 +26,7 @@ public class stockAPICall {
     public stockAPICall() {
         setApiKey();
 
-        currentDate = getDate();
+        this.currentDate = setDate();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
@@ -34,7 +35,7 @@ public class stockAPICall {
         getStockData(symbol);
     }
 
-    public static void getStockData(String symbol) {
+    public void getStockData(String symbol) {
         String urlStr = String.format(
             "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=%s",
             symbol, stockApiKey
@@ -59,10 +60,14 @@ public class stockAPICall {
                 scanner.close();
 
                 JSONParser parser = new JSONParser();
-                JSONObject jsonObject = (JSONObject) parser.parse(responseBuilder.toString());
+                JSONObject calledData = (JSONObject) (
+                        (JSONObject) (
+                            (JSONObject) parser.parse(responseBuilder.toString())
+                        ).get("Time Series (Daily)")
+                ).get(this.currentDate);
 
                 // Print the raw JSON
-                System.out.println(jsonObject.toJSONString());
+                System.out.println(calledData.toJSONString());
             } else {
                 System.out.println("Response Code: " + responseCode);
                 System.out.println("Error fetching stock data.");
@@ -74,7 +79,7 @@ public class stockAPICall {
         }
     }
 
-    private static String getDate() {
+    private static String setDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         return sdf.format(Calendar.getInstance().getTime());
