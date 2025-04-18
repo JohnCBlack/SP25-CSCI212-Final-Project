@@ -21,6 +21,7 @@ public class stockAPICall {
     private static String stockApiKey;
 
     String currentDate;
+    double openPrice, closePrice;
 
     public stockAPICall() {
         setApiKey();
@@ -59,14 +60,26 @@ public class stockAPICall {
                 scanner.close();
 
                 JSONParser parser = new JSONParser();
+
+                JSONObject dataStream = (JSONObject) parser.parse(responseBuilder.toString());
+
+                System.out.println("Stock Data: " + dataStream);
+
                 JSONObject calledData = (JSONObject) (
                         (JSONObject) (
-                            (JSONObject) parser.parse(responseBuilder.toString())
+                                dataStream
                         ).get("Time Series (Daily)")
                 ).get(this.currentDate);
 
+                System.out.println(calledData);
+
                 // Print the raw JSON
-                System.out.println(calledData.toJSONString());
+                float percentChange = findChangePercent(
+                        Float.parseFloat(calledData.get("4. close").toString()),
+                        Float.parseFloat(calledData.get("1. open").toString())
+                );
+
+                System.out.println(percentChange);
             } else {
                 System.out.println("Response Code: " + responseCode);
                 System.out.println("Error fetching stock data.");
@@ -76,6 +89,10 @@ public class stockAPICall {
             System.out.println("Error at stock API call...");
             System.out.println("Exception occurred: " + e.getMessage());
         }
+    }
+
+    private static float findChangePercent(float close, float open) {
+        return ((close-open)/open) * 100;
     }
 
     private static String setDate() {
