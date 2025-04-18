@@ -13,7 +13,9 @@ import org.json.simple.parser.JSONParser;
 public class stockAPICall {
     private static String stockApiKey;
 
-    public static void main(String[] args) {
+    public stockAPICall() {
+        setApiKey();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
         String symbol = sc.next().toUpperCase();
