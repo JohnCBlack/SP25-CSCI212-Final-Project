@@ -8,7 +8,6 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -17,7 +16,8 @@ public class weatherAPICall {
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
     String zipCode;
-    float currentTemp;
+    float currentTemp, maxTemp, minTemp, changeOfRain;
+    String condition;
 
     public weatherAPICall() {
         /* Format
@@ -63,9 +63,9 @@ public class weatherAPICall {
                 JSONParser parser = new JSONParser();
                 JSONObject inputStream = (JSONObject) parser.parse(informationString.toString());
                 JSONObject currentStream = (JSONObject) inputStream.get("current");
-                JSONObject dayForecast = (JSONObject) ((JSONArray) ((JSONObject) inputStream.get("forecast")).get("forecastday")).getFirst();
+                JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) inputStream.get("forecast")).get("forecastday")).getFirst()).get("day");
 
-                System.out.println(dayForecast);
+                System.out.println(dayForecast.get("maxtemp_f"));
 
                 System.out.println("Current temperature: " + currentStream.get("temp_f"));
 
