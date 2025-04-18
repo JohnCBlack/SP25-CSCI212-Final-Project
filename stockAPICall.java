@@ -20,10 +20,12 @@ import org.json.simple.parser.JSONParser;
 public class stockAPICall {
     private static String stockApiKey;
 
+    String currentDate;
+
     public stockAPICall() {
         setApiKey();
 
-        System.out.println("Date " + getDate());
+        currentDate = getDate();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
@@ -72,13 +74,9 @@ public class stockAPICall {
     }
 
     private static String getDate() {
-        System.out.println("Fetching stock date...");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(Calendar.getInstance().getTime());
 
-        System.out.println(date);
-
-        return date;
+        return sdf.format(Calendar.getInstance().getTime());
     }
 
     private static void setApiKey() {
