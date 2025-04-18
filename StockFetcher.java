@@ -56,4 +56,23 @@ public class StockFetcher {
             System.out.println("Exception occurred: " + e.getMessage());
         }
     }
+
+    private static void setApiKey() {
+        if (stockApiKey == null) {
+            System.out.println("Setting API Key");
+
+            var props = new Properties();
+            var envFile = Paths.get("config.env");
+            try {
+                try (var inputStream = Files.newInputStream(envFile)) {
+                    props.load(inputStream);
+                }
+
+                stockApiKey = (String) props.get("STOCK_API_KEY");
+            } catch (IOException e) {
+                System.out.println("Error reading config.env in WeatherAPICall");
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
