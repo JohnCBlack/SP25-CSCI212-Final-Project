@@ -10,6 +10,11 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/*
+* TODO: In order to retrieve information from this API the key will be today's date in YYYY-MM-DD format
+*  The math for the percentage gained/lost will need to then be calculated manually
+* */
+
 public class stockAPICall {
     private static String stockApiKey;
 
