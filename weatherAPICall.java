@@ -1,3 +1,4 @@
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -7,6 +8,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -61,9 +63,9 @@ public class weatherAPICall {
                 JSONParser parser = new JSONParser();
                 JSONObject inputStream = (JSONObject) parser.parse(informationString.toString());
                 JSONObject currentStream = (JSONObject) inputStream.get("current");
-                JSONObject dayForecastStream = (JSONObject) ((JSONObject) inputStream.get("forecast")).get("forecastday");
+                JSONObject dayForecast = (JSONObject) ((JSONArray) ((JSONObject) inputStream.get("forecast")).get("forecastday")).getFirst();
 
-                System.out.println(dayForecastStream.toJSONString());
+                System.out.println(dayForecast);
 
                 System.out.println("Current temperature: " + currentStream.get("temp_f"));
 
