@@ -4,6 +4,8 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -20,6 +22,8 @@ public class stockAPICall {
 
     public stockAPICall() {
         setApiKey();
+
+        System.out.println("Date " + getDate());
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
@@ -65,6 +69,16 @@ public class stockAPICall {
         } catch (Exception e) {
             System.out.println("Exception occurred: " + e.getMessage());
         }
+    }
+
+    private static String getDate() {
+        System.out.println("Fetching stock date...");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(Calendar.getInstance().getTime());
+
+        System.out.println(date);
+
+        return date;
     }
 
     private static void setApiKey() {
