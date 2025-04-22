@@ -106,18 +106,17 @@ public class NewsAPICall {
     //type 1 for news cite. Type 2 for general country
     public void getNewsCite(int type, String source) {
         this.source = source;
-        setNewsAPIKey();
         String urlStr = "";
 
-        if (type == 1) {
-            urlStr = String.format("https://newsapi.org/v2/top-headlines?sources=%s&apiKey=%s", source, NewsAPIKey);
-
-
-        } else if (type == 2){
-            urlStr = String.format("https://newsapi.org/v2/top-headlines?country=%s&apiKey=%s",source,NewsAPIKey);
-        } else {
-            System.out.println("Invalid type specified.");
-            return;
+        switch (type) {
+            case 1 ->
+                    urlStr = String.format("https://newsapi.org/v2/top-headlines?sources=%s&apiKey=%s", source, NewsAPIKey);
+            case 2 ->
+                    urlStr = String.format("https://newsapi.org/v2/top-headlines?country=%s&apiKey=%s", source, NewsAPIKey);
+            default -> {
+                System.out.println("Invalid type specified.");
+                return;
+            }
         }
 
         try {
@@ -145,6 +144,7 @@ public class NewsAPICall {
                 JSONObject inputStream = (JSONObject) parser.parse(infoString.toString());
                 JSONArray articles = (JSONArray) inputStream.get("articles");
                 System.out.println("Articles:\n");
+
                 for (Object articleObj : articles) {
                     JSONObject article = (JSONObject) articleObj;
                     //Get Details
@@ -190,8 +190,8 @@ public class NewsAPICall {
     }
 
     public static void main(String[] args) {
-    NewsAPICall tester = new NewsAPICall("israeli-times");
-    tester.getNewsCite(2,"us");
+        NewsAPICall tester = new NewsAPICall("israeli-times");
+        tester.getNewsCite(2,"us");
     }
 
 }
