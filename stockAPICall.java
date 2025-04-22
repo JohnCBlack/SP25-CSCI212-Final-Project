@@ -50,6 +50,7 @@ public class stockAPICall {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == 200) {
+
                 Scanner scanner = new Scanner(url.openStream());
                 StringBuilder responseBuilder = new StringBuilder();
 
@@ -65,11 +66,15 @@ public class stockAPICall {
 
                 System.out.println("Stock Data: " + dataStream);
 
-                JSONObject calledData = (JSONObject) (
-                        (JSONObject) (
-                                dataStream
-                        ).get("Time Series (Daily)")
-                ).get(this.currentDate);
+                JSONObject calledData = (JSONObject) (dataStream).get("Time Series (Daily)"); //.get(this.currentDate);
+
+                if (calledData.containsKey(getDate())) {
+                    System.out.println("today");
+                    calledData = (JSONObject) (calledData.get(getDate()));
+                } else {
+                    System.out.println("yesterday all my problems seemed so far away");
+                    calledData = (JSONObject) dataStream.get(getYesterday());
+                }
 
                 System.out.println(calledData);
 
