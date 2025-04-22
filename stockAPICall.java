@@ -99,6 +99,15 @@ public class stockAPICall {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         return sdf.format(Calendar.getInstance().getTime());
+    } private static String getYesterday() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return sdf.format(cal.getTime());
+    }
+
+    private String getDate() {
+        return this.currentDate;
     }
 
     private static void setApiKey() {
