@@ -128,10 +128,6 @@ public class stockAPICall {
         }
     }
 
-    private String getDate() {
-        return currentDate;
-    }
-
 
    // ts method loads the API key from the config.env file
     private static void setApiKey() {
