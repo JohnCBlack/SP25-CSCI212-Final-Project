@@ -128,13 +128,7 @@ public class stockAPICall {
         }
     }
 
-    /*
-    method to calculate the percentage change between current price and previous close price
-    formula used: ((current price - previous close) / previous close) * 100
-    */
-    private static float findChangePercent(float current, float previousClose) {
-        return ((current - previousClose) / previousClose) * 100;  // calculates percentage change
-    }
+
 
 
     // ts method returns the current date in yyyy-MM-dd format
