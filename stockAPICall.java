@@ -96,22 +96,10 @@ public class stockAPICall {
 
                 scanner.close();  // closing the scanner after reading all data
 
-                // parsing the JSON response from the api
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(responseBuilder.toString());
-                JSONObject dataStream = (JSONObject) parser.parse(responseBuilder.toString());
 
-                System.out.println("Stock Data: " + dataStream);
-
-                JSONObject calledData = (JSONObject) (dataStream).get("Time Series (Daily)"); //.get(this.currentDate);
-
-                if (calledData.containsKey(getDate())) {
-                    System.out.println("today");
-                    calledData = (JSONObject) (calledData.get(getDate()));
-                } else {
-                    System.out.println("yesterday all my problems seemed so far away");
-                    calledData = (JSONObject) dataStream.get(getYesterday());
-                }
+                System.out.println("Stock Data: " + data);
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
@@ -161,7 +149,7 @@ public class stockAPICall {
     }
 
     private String getDate() {
-        return this.currentDate;
+        return currentDate;
     }
 
 
