@@ -32,8 +32,6 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Properties;
 import java.util.Scanner;
 
