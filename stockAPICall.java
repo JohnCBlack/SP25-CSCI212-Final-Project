@@ -99,9 +99,9 @@ public class stockAPICall {
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
-                    currentPrice = Float.parseFloat(data.get("c").toString());
+                    setCurrentPrice(Float.parseFloat(data.get("c").toString()));
 
-                    percentChange = Float.parseFloat(data.get("dp").toString());
+                    setPercentChange(Float.parseFloat(data.get("dp").toString()));
                 } else {
                     System.out.println("Error: Invalid stock symbol or no data available.");
                 }
@@ -117,8 +117,20 @@ public class stockAPICall {
         }
     }
 
+    // Getters and Setters
+    public void setPercentChange(float percentChange) {
+        this.percentChange = percentChange;
+    } public float getPercentChange() {
+        return this.percentChange;
+    }
+    public void setCurrentPrice(float currentPrice) {
+        this.currentPrice = currentPrice;
+    } public float getCurrentPrice() {
+        return this.currentPrice;
+    }
 
-   // ts method loads the API key from the config.env file
+
+    // ts method loads the API key from the config.env file
     private static void setApiKey() {
         if (stockApiKey == null) {
             System.out.println("Setting API Key");
