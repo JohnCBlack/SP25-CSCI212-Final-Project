@@ -1,17 +1,12 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Properties;
 import java.util.Scanner;
 
 public class weatherAPICall extends APICall{
-    private static String weatherApiKey;
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
     String zipCode, condition;
@@ -19,7 +14,7 @@ public class weatherAPICall extends APICall{
 
     public weatherAPICall() {
         // Set Api key
-        setApiKey();
+        setApiKey("WEATHER_API_KEY");
 
         // Set zipcode for user
         Scanner sc = new Scanner(System.in);
@@ -30,7 +25,7 @@ public class weatherAPICall extends APICall{
     }
 
     public void getWeather(String zipcode) {
-        String urlStr = String.format("%s%s&q=%s&days=1&aqi=no&alerts=no", baseURL, weatherApiKey, zipcode);
+        String urlStr = String.format("%s%s&q=%s&days=1&aqi=no&alerts=no", baseURL, APIKey, zipcode);
 
         try {
             URL url = new URI(urlStr).toURL();
@@ -64,25 +59,6 @@ public class weatherAPICall extends APICall{
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
-        }
-    }
-
-    private static void setApiKey() {
-        if (weatherApiKey == null) {
-            System.out.println("Setting API Key");
-
-            var props = new Properties();
-            var envFile = Paths.get("config.env");
-            try {
-                try (var inputStream = Files.newInputStream(envFile)) {
-                    props.load(inputStream);
-                }
-
-                weatherApiKey = (String) props.get("WEATHER_API_KEY");
-            } catch (IOException e) {
-                System.out.println("Error reading config.env in WeatherAPICall");
-                throw new RuntimeException(e);
-            }
         }
     }
 

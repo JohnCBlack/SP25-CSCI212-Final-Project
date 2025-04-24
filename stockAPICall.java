@@ -26,13 +26,9 @@ Previous Close: 193.16
 Current Price: 199.74
 Percent Change: 3.4065034%
  */
-import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.HttpURLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Properties;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
@@ -44,14 +40,14 @@ calculates percentage change using previous close price for better accuracy like
  */
 
 public class stockAPICall extends APICall{
-    private static String stockApiKey;  // stores the API key to be used in requests
+    //private static String stockApiKey;  // stores the API key to be used in requests
     float percentChange, currentPrice;
 
     /*
     constructor to initialize the API key and current date and handle user input
     */
     public stockAPICall() {
-        setApiKey();  // loads the API key
+        setApiKey("STOCK_API_KEY");  // loads the API key
 
         // testing through console (for GUI implementation remove this part)
         Scanner sc = new Scanner(System.in);
@@ -68,7 +64,7 @@ public class stockAPICall extends APICall{
         // constructing the Finnhub API URL with the stock symbol and API key
         String urlStr = String.format(
             "https://finnhub.io/api/v1/quote?symbol=%s&token=%s",
-            symbol, stockApiKey
+            symbol, APIKey
         );
 
         try {
@@ -117,28 +113,5 @@ public class stockAPICall extends APICall{
         this.currentPrice = currentPrice;
     } public float getCurrentPrice() {
         return this.currentPrice;
-    }
-
-    // ts method loads the API key from the config.env file
-    private static void setApiKey() {
-        if (stockApiKey == null) {
-            System.out.println("Setting API Key");
-
-            var props = new Properties();
-            var envFile = Paths.get("config.env");
-            try {
-                try (var inputStream = Files.newInputStream(envFile)) {
-                    props.load(inputStream);
-                }
-
-                stockApiKey = (String) props.get("STOCK_API_KEY");  // load the API key from the file
-                if (stockApiKey == null || stockApiKey.isEmpty()) {
-                    throw new RuntimeException("STOCK_API_KEY not found in config.env");
-                }
-            } catch (IOException e) {
-                System.out.println("Error reading config.env in stockAPICall");
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
