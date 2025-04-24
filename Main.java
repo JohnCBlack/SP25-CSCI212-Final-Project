@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        weatherAPICall weather = new weatherAPICall();
+        /*weatherAPICall weather = new weatherAPICall();
 
         //FOR TESTING PURPOSES
         System.out.println(
@@ -15,6 +15,9 @@ public class Main {
         stockAPICall stock = new stockAPICall();
 
         //FOR TESTING PURPOSES
-        System.out.printf("%f, %f", stock.currentPrice, stock.percentChange);
+        System.out.printf("%f, %f", stock.currentPrice, stock.percentChange);*/
+
+        NewsAPICall news = new NewsAPICall("bbc-news");
+        news.getNewsCite(1);
     }
 }

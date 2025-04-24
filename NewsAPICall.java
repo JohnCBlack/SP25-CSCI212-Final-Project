@@ -9,7 +9,6 @@ import java.util.Map;
 
 
 public class NewsAPICall extends APICall{
-    private static String NewsAPIKey;
     private String source;
 
     //List of specific news cites to pull from
@@ -95,15 +94,15 @@ public class NewsAPICall extends APICall{
     }
 
     //type 1 for news cite. Type 2 for general country
-    public void getNewsCite(int type, String source) {
-        this.source = source;
+    public void getNewsCite(int type) {
+
         String urlStr = "";
 
         switch (type) {
             case 1 ->
-                    urlStr = String.format("https://newsapi.org/v2/top-headlines?sources=%s&apiKey=%s", source, NewsAPIKey);
+                    urlStr = String.format("https://newsapi.org/v2/top-headlines?sources=%s&apiKey=%s", this.source, APIKey);
             case 2 ->
-                    urlStr = String.format("https://newsapi.org/v2/top-headlines?country=%s&apiKey=%s", source, NewsAPIKey);
+                    urlStr = String.format("https://newsapi.org/v2/top-headlines?country=%s&apiKey=%s", this.source, APIKey);
             default -> {
                 System.out.println("Invalid type specified.");
                 return;
@@ -136,6 +135,7 @@ public class NewsAPICall extends APICall{
                     System.out.println("Author: " + author);
                     System.out.println("Description: " + description);
                     System.out.println("URL: " + link);
+                    System.out.println("---------------------------------------");
                 }
 
             } else {
