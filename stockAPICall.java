@@ -48,15 +48,13 @@ calculates percentage change using previous close price for better accuracy like
 
 public class stockAPICall {
     private static String stockApiKey;  // stores the API key to be used in requests
-    private static String currentDate;  // stores the current date (static for all instances)
-    double openPrice, closePrice, previousClose;  // stores stock data like open, close, and previous close prices
+    float openPrice, closePrice, previousClose;  // stores stock data like open, close, and previous close prices
 
     /*
-    constructor to initialize the API key and current date, and handle user input
+    constructor to initialize the API key and current date and handle user input
     */
     public stockAPICall() {
         setApiKey();  // loads the API key
-        currentDate = setDate();  // sets the current date as static
 
         // testing through console (for GUI implementation remove this part)
         Scanner sc = new Scanner(System.in);
@@ -103,13 +101,13 @@ public class stockAPICall {
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
-                    closePrice = Double.parseDouble(data.get("c").toString());  // current price
-                    previousClose = Double.parseDouble(data.get("pc").toString());  // previous close price
+                    closePrice = Float.parseFloat(data.get("c").toString());  // current price
+                    previousClose = Float.parseFloat(data.get("pc").toString());  // previous close price
 
                     // calculate percent change using previous close price
-                    float percentChange = findChangePercent((float) closePrice, (float) previousClose);
+                    float percentChange = Float.parseFloat(data.get("dp").toString());
 
-                    // print the stock data for now, will use variables for gui i assume
+                    // print the stock data for now, will use variables for gui, I assume
                     System.out.println("Previous Close: " + previousClose);
                     System.out.println("Current Price: " + closePrice);
                     System.out.println("Percent Change: " + percentChange + "%");
@@ -150,10 +148,5 @@ public class stockAPICall {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    // main method to run the stockAPICall class (testing with console input
-    public static void main(String[] args) {
-        new stockAPICall();
     }
 }
