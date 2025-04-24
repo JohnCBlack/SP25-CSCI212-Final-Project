@@ -128,20 +128,6 @@ public class stockAPICall {
         }
     }
 
-
-
-
-    // ts method returns the current date in yyyy-MM-dd format
-    private static String setDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(Calendar.getInstance().getTime());
-    } private static String getYesterday() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        final Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -1);
-        return sdf.format(cal.getTime());
-    }
-
     private String getDate() {
         return currentDate;
     }
