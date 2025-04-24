@@ -95,7 +95,7 @@ public class stockAPICall {
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(responseBuilder.toString());
 
-                System.out.println("Stock Data: " + data);
+                //System.out.println("Stock Data: " + data);
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
