@@ -87,7 +87,6 @@ public class stockAPICall {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == 200) {
-                // reading the response data
                 Scanner scanner = new Scanner(url.openStream());
                 StringBuilder responseBuilder = new StringBuilder();
 
@@ -100,8 +99,19 @@ public class stockAPICall {
                 // parsing the JSON response from the api
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(responseBuilder.toString());
+                JSONObject dataStream = (JSONObject) parser.parse(responseBuilder.toString());
 
-                System.out.println("Stock Data: " + data);
+                System.out.println("Stock Data: " + dataStream);
+
+                JSONObject calledData = (JSONObject) (dataStream).get("Time Series (Daily)"); //.get(this.currentDate);
+
+                if (calledData.containsKey(getDate())) {
+                    System.out.println("today");
+                    calledData = (JSONObject) (calledData.get(getDate()));
+                } else {
+                    System.out.println("yesterday all my problems seemed so far away");
+                    calledData = (JSONObject) dataStream.get(getYesterday());
+                }
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
@@ -143,6 +153,15 @@ public class stockAPICall {
     private static String setDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(Calendar.getInstance().getTime());
+    } private static String getYesterday() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return sdf.format(cal.getTime());
+    }
+
+    private String getDate() {
+        return this.currentDate;
     }
 
 
