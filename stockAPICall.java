@@ -40,7 +40,7 @@ calculates percentage change using previous close price for better accuracy like
  */
 
 public class stockAPICall extends APICall{
-    //private static String stockApiKey;  // stores the API key to be used in requests
+    // stores the API key to be used in requests
     float percentChange, currentPrice;
 
     /*
@@ -79,9 +79,6 @@ public class stockAPICall extends APICall{
 
             if (responseCode == 200) {
                 JSONObject dataStream = getDataStream(url);
-
-                // FOR TESTING PURPOSES
-                //System.out.println("Stock Data: " + data);
 
                 // parsing data from the response and calculating percentage change
                 if (dataStream.containsKey("c") && dataStream.containsKey("pc")) {
