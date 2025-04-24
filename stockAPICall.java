@@ -46,7 +46,7 @@ calculates percentage change using previous close price for better accuracy like
 
 public class stockAPICall {
     private static String stockApiKey;  // stores the API key to be used in requests
-    float openPrice, closePrice, previousClose;  // stores stock data like open, close, and previous close prices
+    float percentChange, currentPrice;
 
     /*
     constructor to initialize the API key and current date and handle user input
@@ -99,16 +99,9 @@ public class stockAPICall {
 
                 // parsing data from the response and calculating percentage change
                 if (data.containsKey("c") && data.containsKey("pc")) {
-                    closePrice = Float.parseFloat(data.get("c").toString());  // current price
-                    previousClose = Float.parseFloat(data.get("pc").toString());  // previous close price
+                    currentPrice = Float.parseFloat(data.get("c").toString());
 
-                    // calculate percent change using previous close price
-                    float percentChange = Float.parseFloat(data.get("dp").toString());
-
-                    // print the stock data for now, will use variables for gui, I assume
-                    System.out.println("Previous Close: " + previousClose);
-                    System.out.println("Current Price: " + closePrice);
-                    System.out.println("Percent Change: " + percentChange + "%");
+                    percentChange = Float.parseFloat(data.get("dp").toString());
                 } else {
                     System.out.println("Error: Invalid stock symbol or no data available.");
                 }
