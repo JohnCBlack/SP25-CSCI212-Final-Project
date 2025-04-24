@@ -1,23 +1,14 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Scanner;
 
 
 
-public class NewsAPICall {
+public class NewsAPICall extends APICall{
     private static String NewsAPIKey;
     private String source;
 
@@ -100,7 +91,7 @@ public class NewsAPICall {
 
     public NewsAPICall(String source){
         this.source = source;
-        setNewsAPIKey();
+        setApiKey("NEWS_API_KEY");
     }
 
     //type 1 for news cite. Type 2 for general country
@@ -128,20 +119,7 @@ public class NewsAPICall {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == 200) {
-                Scanner scanner = new Scanner(url.openStream());
-                StringBuilder infoString = new StringBuilder();
-
-                while (scanner.hasNext()) {
-                    infoString.append(scanner.nextLine());
-                }
-                System.out.println("Received: " + infoString);
-                scanner.close();
-
-
-                // The JSON Parser will take a call and organize them for println for all the articles sent
-
-                JSONParser parser = new JSONParser();
-                JSONObject inputStream = (JSONObject) parser.parse(infoString.toString());
+                JSONObject inputStream = getDataStream(url);
                 JSONArray articles = (JSONArray) inputStream.get("articles");
                 System.out.println("Articles:\n");
 
@@ -169,31 +147,6 @@ public class NewsAPICall {
         }
 
     }
-
-    private static void setNewsAPIKey() {
-        if (NewsAPIKey == null) {
-            System.out.println("Setting API Key");
-
-            var properties = new Properties();
-            var envFile = Paths.get("config.env");
-
-            try {
-                try (var inputStream = Files.newInputStream(envFile)) {
-                    properties.load(inputStream);
-                }
-                NewsAPIKey = (String) properties.get("NEWS_API_KEY");
-            } catch (IOException e) {
-                System.out.println("Error reading config.env int NewAPICall");
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        NewsAPICall tester = new NewsAPICall("israeli-times");
-        tester.getNewsCite(2,"us");
-    }
-
 }
 
 
