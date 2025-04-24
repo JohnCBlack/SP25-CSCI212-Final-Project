@@ -1,6 +1,5 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -11,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class weatherAPICall {
+public class weatherAPICall extends APICall{
     private static String weatherApiKey;
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
@@ -42,19 +41,10 @@ public class weatherAPICall {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == 200) {
-                Scanner scanner = new Scanner(url.openStream());
-                StringBuilder informationString = new StringBuilder();
+                JSONObject dataStream = getDataStream(url);
 
-                while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
-                }
-
-                scanner.close();
-
-                JSONParser parser = new JSONParser();
-                JSONObject inputStream = (JSONObject) parser.parse(informationString.toString());
-                JSONObject currentStream = (JSONObject) inputStream.get("current");
-                JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) inputStream.get("forecast")).get("forecastday")).getFirst()).get("day");
+                JSONObject currentStream = (JSONObject) dataStream.get("current");
+                JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) dataStream.get("forecast")).get("forecastday")).getFirst()).get("day");
 
                 // Current stream
                 setCurrentTemp(Float.parseFloat(currentStream.get("temp_f").toString()));

@@ -36,7 +36,6 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /*
 uses finnhub api to fetch realtime stock data and calculate percentage change
@@ -44,7 +43,7 @@ api key handling from config.env file
 calculates percentage change using previous close price for better accuracy like google does
  */
 
-public class stockAPICall {
+public class stockAPICall extends APICall{
     private static String stockApiKey;  // stores the API key to be used in requests
     float percentChange, currentPrice;
 
@@ -83,25 +82,16 @@ public class stockAPICall {
             int responseCode = connection.getResponseCode();
 
             if (responseCode == 200) {
-                Scanner scanner = new Scanner(url.openStream());
-                StringBuilder responseBuilder = new StringBuilder();
+                JSONObject dataStream = getDataStream(url);
 
-                while (scanner.hasNext()) {
-                    responseBuilder.append(scanner.nextLine());
-                }
-
-                scanner.close();  // closing the scanner after reading all data
-
-                JSONParser parser = new JSONParser();
-                JSONObject data = (JSONObject) parser.parse(responseBuilder.toString());
-
+                // FOR TESTING PURPOSES
                 //System.out.println("Stock Data: " + data);
 
                 // parsing data from the response and calculating percentage change
-                if (data.containsKey("c") && data.containsKey("pc")) {
-                    setCurrentPrice(Float.parseFloat(data.get("c").toString()));
+                if (dataStream.containsKey("c") && dataStream.containsKey("pc")) {
+                    setCurrentPrice(Float.parseFloat(dataStream.get("c").toString()));
 
-                    setPercentChange(Float.parseFloat(data.get("dp").toString()));
+                    setPercentChange(Float.parseFloat(dataStream.get("dp").toString()));
                 } else {
                     System.out.println("Error: Invalid stock symbol or no data available.");
                 }
@@ -128,7 +118,6 @@ public class stockAPICall {
     } public float getCurrentPrice() {
         return this.currentPrice;
     }
-
 
     // ts method loads the API key from the config.env file
     private static void setApiKey() {
