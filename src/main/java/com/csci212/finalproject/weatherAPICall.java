@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class weatherAPICall extends APICall{
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
 
-    String zipCode, condition;
+    String zipCode, condition, icon;
     float currentTemp, maxTemp, minTemp, changeOfRain;
 
     public weatherAPICall() {
@@ -45,6 +45,7 @@ public class weatherAPICall extends APICall{
 
                 // Current stream
                 setCurrentTemp(Float.parseFloat(currentStream.get("temp_f").toString()));
+                setIcon(((JSONObject) (currentStream.get("condition"))).get("icon").toString());
                 setCondition(((JSONObject) (currentStream.get("condition"))).get("text").toString());
 
                 //dayForecast
@@ -87,6 +88,11 @@ public class weatherAPICall extends APICall{
         return this.changeOfRain;
     }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    } public String getIcon() {
+        return this.icon;
+    }
     public void setCondition(String condition) {
         this.condition = condition;
     } public String getCondition() {

@@ -37,11 +37,10 @@ public class APICall {
 
     protected void setApiKey(String type) {
         if (APIKey == null) {
-            System.out.printf("Setting %s Key %n", type);
-
             var props = new Properties();
             var envFile = Paths.get("src/main/resources/com/csci212/finalproject/config.env");
-            if (!Files.exists(envFile)) {
+            if (Files.exists(envFile)) {
+                System.out.printf("Setting %s Key %n", type);
                 try {
                     var inputStream = Files.newInputStream(envFile);
                     props.load(inputStream);
@@ -56,9 +55,9 @@ public class APICall {
                     System.out.printf("Error reading config.env in %s %n", type);
                     throw new RuntimeException(e);
                 }
+            } else {
+                System.out.println("config.env does not exist...");
             }
-        } else {
-            System.out.println("config.env does not exist...");
         }
     }
 }
