@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +25,14 @@ public class SettingsController implements Initializable {
     @FXML
     private Button saveButton;
     private void saveSettings(ActionEvent event) throws IOException{
+        String zipCodeText = zipCode.getText();
+        if (!isValidZipCode(zipCodeText)) {
+            showAlert("Invalid Zip Code", "Invalid Zip Code",
+                    "Please enter a valid 5-digit zip code."
+            );
+            return;
+        }
+
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
 
@@ -51,5 +60,17 @@ public class SettingsController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    private boolean isValidZipCode(String zipCode) {
+        return zipCode != null && zipCode.matches("\\d{5}(-\\d{4})?");
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
