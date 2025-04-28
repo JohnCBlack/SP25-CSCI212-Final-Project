@@ -20,7 +20,11 @@ public class weatherAPICall extends APICall{
         JSONObject settingsStream = getJSONSettings();
         assert settingsStream != null;
 
-        this.zipCode = settingsStream.get("zipCode").toString();
+        if (settingsStream.containsKey("zipCode")) {
+            this.zipCode = settingsStream.get("zipCode").toString();
+        } else {
+            System.out.println("Error: No zip code specified in settings file.");
+        }
 
         getWeather(zipCode);
     }

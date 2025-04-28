@@ -2,10 +2,13 @@ package com.csci212.finalproject;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,16 +28,29 @@ public class MainController implements Initializable {
     @FXML
     private Label changeOfPercp;
 
+    @FXML
+    private Button settingsButton;
+
+
     public void initialize(URL arg0, ResourceBundle arg1) {
         weather = new weatherAPICall();
 
-        Image icon = new Image(
+        try {
+            Image settingsIcon = new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/settings-icon.png"));
+            ImageView settingsIconView = new ImageView(settingsIcon);
+            settingsIconView.setFitHeight(25);
+            settingsIconView.setPreserveRatio(true);
+            settingsButton.setGraphic(settingsIconView);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image weathericon = new Image(
                 String.format("http:%s", weather.getIcon())
         );
 
         conditionLabel.setText(weather.getCondition());
-        conditionLabel.setAlignment(javafx.geometry.Pos.CENTER);
-        weatherIcon.setImage(icon); //set image
+        weatherIcon.setImage(weathericon); //set image
         currentTemp.setText(
                 String.format("%.1f°F", weather.getCurrentTemp())
         );
