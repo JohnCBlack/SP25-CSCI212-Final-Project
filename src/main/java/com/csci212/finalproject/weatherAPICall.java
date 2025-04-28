@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.Scanner;
 
 public class weatherAPICall extends APICall{
     private static final String baseURL = "https://api.weatherapi.com/v1/forecast.json?key=";
@@ -18,12 +17,9 @@ public class weatherAPICall extends APICall{
         // Set Api key
         setApiKey("WEATHER_API_KEY");
 
-        // Set zipcode for user
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter the your zip code: ");
-//        this.zipCode = sc.next();
-
         JSONObject settingsStream = getJSONSettings();
+        assert settingsStream != null;
+
         this.zipCode = settingsStream.get("zipCode").toString();
 
         getWeather(zipCode);
@@ -43,15 +39,14 @@ public class weatherAPICall extends APICall{
             if (responseCode == 200) {
                 JSONObject dataStream = getDataStream(url);
 
-                JSONObject currentStream = (JSONObject) dataStream.get("current");
-                JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) dataStream.get("forecast")).get("forecastday")).getFirst()).get("day");
-
                 // Current stream
+                JSONObject currentStream = (JSONObject) dataStream.get("current");
                 setCurrentTemp(Float.parseFloat(currentStream.get("temp_f").toString()));
                 setIcon(((JSONObject) (currentStream.get("condition"))).get("icon").toString());
                 setCondition(((JSONObject) (currentStream.get("condition"))).get("text").toString());
 
                 //dayForecast
+                JSONObject dayForecast = (JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) dataStream.get("forecast")).get("forecastday")).getFirst()).get("day");
                 setMaxTemp(Float.parseFloat(dayForecast.get("maxtemp_f").toString()));
                 setMinTemp(Float.parseFloat(dayForecast.get("mintemp_f").toString()));
                 setChangeOfRain(Float.parseFloat(dayForecast.get("daily_chance_of_rain").toString()));
