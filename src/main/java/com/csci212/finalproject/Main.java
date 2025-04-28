@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Daily Recap");
         stage.setScene(scene);
         stage.show();
     }
@@ -20,21 +20,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
 
-//        weatherAPICall weather = new weatherAPICall();
-//
-//        //FOR TESTING PURPOSES
-//        System.out.println(
-//                "Weather Report:\n" +
-//                        "Icon: " + weather.icon + "\n" +
-//                        "Condition: " + weather.condition + "\n" +
-//                        "Current Temperature: " + weather.currentTemp + "°F\n" +
-//                        "Maximum Temperature: " + weather.maxTemp + "°F\n" +
-//                        "Minimum Temperature: " + weather.minTemp + "°F\n" +
-//                        "Chance of Rain: " + weather.changeOfRain + "%"
-//        );
-
-//        stockAPICall stock = new stockAPICall();
-//
 //        //FOR TESTING PURPOSES
 //        System.out.printf("%f, %f", stock.currentPrice, stock.percentChange);
 //

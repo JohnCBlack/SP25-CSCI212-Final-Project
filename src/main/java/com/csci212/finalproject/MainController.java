@@ -13,6 +13,8 @@ public class MainController implements Initializable {
     private weatherAPICall weather; // Keep separate for setting page
 
     @FXML
+    private Label conditionLabel;
+    @FXML
     private ImageView weatherIcon;
     @FXML
     private Label currentTemp;
@@ -26,20 +28,12 @@ public class MainController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         weather = new weatherAPICall();
 
-        System.out.println(
-        "Weather Report:\n" +
-                "Icon: " + weather.icon + "\n" +
-                "Condition: " + weather.condition + "\n" +
-                "Current Temperature: " + weather.currentTemp + "°F\n" +
-                "Maximum Temperature: " + weather.maxTemp + "°F\n" +
-                "Minimum Temperature: " + weather.minTemp + "°F\n" +
-                "Chance of Rain: " + weather.changeOfRain + "%"
-        );
-
         Image icon = new Image(
                 String.format("http:%s", weather.getIcon())
         );
 
+        conditionLabel.setText(weather.getCondition());
+        conditionLabel.setAlignment(javafx.geometry.Pos.CENTER);
         weatherIcon.setImage(icon); //set image
         currentTemp.setText(
                 String.format("%.1f°F", weather.getCurrentTemp())
