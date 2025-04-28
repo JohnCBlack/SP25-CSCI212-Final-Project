@@ -39,3 +39,4 @@ build/
 
 # config
 config.env
+settings.json

@@ -1,9 +1,12 @@
 package com.csci212.finalproject;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -33,6 +36,19 @@ public class APICall {
             System.out.println("Error reading data stream from API");
             throw new RuntimeException(e);
         }
+    }
+
+    public static JSONObject getJSONSettings() {
+        JSONParser parser = new JSONParser();
+        if (Files.exists(Paths.get("src/main/resources/com/csci212/finalproject/settings.json"))) {
+            try {
+                return (JSONObject) parser.parse(new FileReader("src/main/resources/com/csci212/finalproject/settings.json"));
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println("Settings file not found...");
+        return null;
     }
 
     protected void setApiKey(String type) {

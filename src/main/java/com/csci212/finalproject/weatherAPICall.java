@@ -19,9 +19,12 @@ public class weatherAPICall extends APICall{
         setApiKey("WEATHER_API_KEY");
 
         // Set zipcode for user
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the your zip code: ");
-        this.zipCode = sc.next();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Enter the your zip code: ");
+//        this.zipCode = sc.next();
+
+        JSONObject settingsStream = getJSONSettings();
+        this.zipCode = settingsStream.get("zipCode").toString();
 
         getWeather(zipCode);
     }

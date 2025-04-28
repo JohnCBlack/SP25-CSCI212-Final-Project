@@ -2,7 +2,11 @@ package com.csci212.finalproject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,28 +18,38 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
-    Stage stage = new Stage();
-
     @FXML
     private TextField zipCode;
 
     @FXML
     private Button saveButton;
-    private void saveSettings(ActionEvent event) {
+    private void saveSettings(ActionEvent event) throws IOException{
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
             file.flush();
+            System.out.println("Settings saved!");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void initialize(URL arg0, ResourceBundle arg1) {
-        saveButton.setOnAction(this::saveSettings);
+        saveButton.setOnAction(event -> {
+            try {
+                saveSettings(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
