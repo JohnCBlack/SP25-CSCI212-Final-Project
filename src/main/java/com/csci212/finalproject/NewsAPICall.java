@@ -12,7 +12,10 @@ import java.util.Map;
 
 
 public class NewsAPICall extends APICall{
-    private String source;
+    private String keyWord;
+    private String category;
+    private String country;
+    private String language;
 
     //List of specific news cites to pull from
     public static String[] sourceArray = {
@@ -26,7 +29,34 @@ public class NewsAPICall extends APICall{
             "Russia","Saudi Arabia","Serbia","Singapore","Slovakia","Slovenia","South Africa","South Korea","Sweden","Switzerland","Taiwan","Thailand","Turkey","UAE",
             "Ukraine","United Kingdom","United States","Venezuela"
     };
+    //List for catagory combobox
+    public final static String[] catagoryArray = {
+            "business","entertainment","general","health","science","sports","technology",
+    };
 
+    //List for Language combobox
+    public final static String[] languageArray = {
+            "Arabic", "German","English","Spanish","French","Hebrew","Italian","Dutch","Norwegian","Portuguese", "Russian","Swedish","Universal Dependencies","Chinese"
+    };
+
+    //Hashmap for language to its code
+    public static final Map<String, String> languageMap = new HashMap<>();
+    static {
+        languageMap.put("Arabic","ar");
+        languageMap.put("German","de");
+        languageMap.put("English","en");
+        languageMap.put("Spanish", "es");
+        languageMap.put("French", "fr");
+        languageMap.put("Hebrew", "he");
+        languageMap.put("Italian","it");
+        languageMap.put("Dutch","nl");
+        languageMap.put("Norwegian","no");
+        languageMap.put("Portuguese","pt");
+        languageMap.put("Russian","ru");
+        languageMap.put("Swedish","sv");
+        languageMap.put("Universal Dependencies", "ud");
+        languageMap.put("Chinese","zh");
+    }
 
     //Hashmap of all countries that are offered by the API
     public static final Map<String, String> countryMap = new HashMap<>();
@@ -90,22 +120,34 @@ public class NewsAPICall extends APICall{
     //Possibly a dropdown to give a list of sources
     //GET https://newsapi.org/v2/everything?q=Apple&from=2025-04-18&sortBy=popularity&apiKey=API_KEY
     // GET https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
-
+    /**
     public NewsAPICall(String source){
         this.source = source;
         setApiKey("NEWS_API_KEY");
     }
+    */
 
     //type 1 for news cite. Type 2 for general country
-    public void getNewsCite(int type) {
+    public void getNewsCite(int type, String keyWord, String language, String category, String country) {
+        this.keyWord = keyWord;
+        this.language = language;
+        this.category = category;
+        this. country = country;
 
+        //setApiKey("NEWS_API_KEY");
+        String APIKey = "63880b83d336449895b1dc9918d08437";
         String urlStr = "";
 
         switch (type) {
-            case 1 ->
-                    urlStr = String.format("https://newsapi.org/v2/top-headlines?sources=%s&apiKey=%s", this.source, APIKey);
-            case 2 ->
-                    urlStr = String.format("https://newsapi.org/v2/top-headlines?country=%s&apiKey=%s", this.source, APIKey);
+            case 1 ->{
+                    String languageParam = (language == null) ? "" : "language=" + language +"&";
+                    urlStr = String.format("https://newsapi.org/v2/everything?q=%s&%sapiKey=%s", this.keyWord,languageParam,APIKey);
+            }
+            case 2 ->{
+                    String categoryParam = (category == null) ? "" : "category=" + category + "&";
+                    String countryParam = (country == null) ? "" : "country=" + country + "&";
+                    urlStr = String.format("https://newsapi.org/v2/top-headlines?%s%s%s",categoryParam ,countryParam,"apiKey="+APIKey);
+            }
             default -> {
                 System.out.println("Invalid type specified.");
                 return;

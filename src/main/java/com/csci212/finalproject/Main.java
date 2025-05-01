@@ -25,9 +25,11 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.show();
         }
+
     }
 
     public static void main(String[] args) {
+
         launch();
 
         //FOR TESTING PURPOSES
@@ -35,5 +37,11 @@ public class Main extends Application {
 //
 //        NewsAPICall news = new NewsAPICall("bbc-news");
 //        news.getNewsCite(1);
+
+        /*
+        This is the NewsAPI Call! To make it go to the display box just change the system.out.print"...." to the box you want.
+        NewsAPICall call = new NewsAPICall();
+        call.getNewsCite(2,null, "health", null);
+        */
     }
 }
