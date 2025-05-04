@@ -45,10 +45,9 @@ public class NewsAPICall extends APICall{
 
         setApiKey("NEWS_API_KEY");
 
-        String categoryParam = "category=" + category + "&";
-        String countryParam = "country=" + country + "&";
-
-        String urlStr = String.format("https://newsapi.org/v2/top-headlines?%s%s%s",categoryParam ,countryParam,"apiKey="+APIKey);
+        String urlStr = String.format("https://newsapi.org/v2/top-headlines?category=%s&country=%s&apiKey=%s",
+                category,country,APIKey
+        );
 
         processData(urlStr);
     }
