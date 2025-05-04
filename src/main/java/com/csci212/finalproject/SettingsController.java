@@ -25,8 +25,13 @@ import java.util.ResourceBundle;
 
 
 public class SettingsController implements Initializable {
+    //Zip code
     @FXML
     private TextField zipCode;
+
+    //Stock input
+    @FXML
+    private TextField stockBox;
 
     //Country box
     @FXML
@@ -108,6 +113,13 @@ public class SettingsController implements Initializable {
     @FXML
     private Button saveButton;
     public void saveSettings(ActionEvent event) throws IOException{
+        if (!checkFields()) { //Checks if all fields are filled
+            showAlert("Empty Fields", "All fields must be input",
+                    "Please fill in all fields."
+            );
+            return;
+        }
+
         String zipCodeText = zipCode.getText();
         if (!isValidZipCode(zipCodeText)) {
             showAlert("Invalid Zip Code", "Invalid Zip Code",
@@ -151,6 +163,12 @@ public class SettingsController implements Initializable {
         categoryBox.setItems(category);
         newsCountryBox.setItems(country);
 
+    }
+
+    private boolean checkFields() {
+        return !(zipCode.getText().isEmpty() ||
+                stockBox.getText().isEmpty() ||
+                newsCountryBox.getValue() == null);
     }
 
     private boolean isValidZipCode(String zipCode) {

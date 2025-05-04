@@ -33,5 +33,5 @@
    </Label>
    <ComboBox fx:id="newsCountryBox" layoutX="95.0" layoutY="179.0" prefHeight="25.0" prefWidth="124.0" promptText="Select Country" />
    <ComboBox fx:id="categoryBox" layoutX="317.0" layoutY="179.0" prefHeight="25.0" prefWidth="150.0" promptText="Select Catagory" />
-   <TextField layoutX="100.0" layoutY="99.0" prefHeight="25.0" prefWidth="436.0" promptText="Enter stock tickers separated by a comma" />
+   <TextField fx:id="stockBox" layoutX="100.0" layoutY="99.0" prefHeight="25.0" prefWidth="436.0" promptText="Enter stock tickers separated by a comma" />
 </AnchorPane>
