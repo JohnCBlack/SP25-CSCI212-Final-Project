@@ -6,34 +6,11 @@ import org.json.simple.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 
 
 public class NewsAPICall extends APICall{
     private String keyWord,category,country,language;
-
-
-    //Hashmap for language to its code
-    public static final Map<String, String> languageMap = new HashMap<>();
-    static {
-        languageMap.put("Arabic","ar");
-        languageMap.put("German","de");
-        languageMap.put("English","en");
-        languageMap.put("Spanish", "es");
-        languageMap.put("French", "fr");
-        languageMap.put("Hebrew", "he");
-        languageMap.put("Italian","it");
-        languageMap.put("Dutch","nl");
-        languageMap.put("Norwegian","no");
-        languageMap.put("Portuguese","pt");
-        languageMap.put("Russian","ru");
-        languageMap.put("Swedish","sv");
-        languageMap.put("Universal Dependencies", "ud");
-        languageMap.put("Chinese","zh");
-    }
-
 
     //Possibly a dropdown to give a list of sources
     //GET https://newsapi.org/v2/everything?q=Apple&from=2025-04-18&sortBy=popularity&apiKey=API_KEY
@@ -58,7 +35,7 @@ public class NewsAPICall extends APICall{
 
         setApiKey("NEWS_API_KEY");
         String urlStr = "";
-        String languageParam = (language == null) ? "" : "language=" + language +"&";
+        String languageParam = "language=" + language +"&";
         urlStr = String.format("https://newsapi.org/v2/everything?q=%s&%sapiKey=%s", this.keyWord,languageParam,APIKey);
 
         processData(urlStr);
