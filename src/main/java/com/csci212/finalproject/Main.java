@@ -29,19 +29,14 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+//        //This is the NewsAPI Call! To make it go to the display box just change the system.out.print"...." to the box you want.
+//        NewsAPICall call = new NewsAPICall();
+//        call.getNewsHeadline("general", "us");
 
         launch();
 
         //FOR TESTING PURPOSES
 //        System.out.printf("%f, %f", stock.currentPrice, stock.percentChange);
-//
-//        NewsAPICall news = new NewsAPICall("bbc-news");
-//        news.getNewsCite(1);
 
-        /*
-        This is the NewsAPI Call! To make it go to the display box just change the system.out.print"...." to the box you want.
-        NewsAPICall call = new NewsAPICall();
-        call.getNewsCite(2,null, "health", null);
-        */
     }
 }
