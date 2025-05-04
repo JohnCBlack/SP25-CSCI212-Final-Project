@@ -21,7 +21,7 @@ public class Main extends Application {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Settings.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Daily Recap");
+            stage.setTitle("Daily Recap Settings");
             stage.setScene(scene);
             stage.show();
         }
