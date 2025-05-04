@@ -18,27 +18,6 @@ public class NewsAPICall extends APICall{
     private String country;
     private String language;
 
-    //List of specific news cites to pull from
-    public static String[] sourceArray = {
-            "bbc-news","fox-news","cnn","associated-press"
-    };
-    //This list can be used for the GUI ComboBox.
-    public final static String[] countryArray = {
-        "Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","China","Columbia","Cuba","Czech",
-            "Egypt","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan",
-            "Latvia", "Lithuania","Malaysia","Mexico","Morocco","Netherlands","New Zealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania",
-            "Russia","Saudi Arabia","Serbia","Singapore","Slovakia","Slovenia","South Africa","South Korea","Sweden","Switzerland","Taiwan","Thailand","Turkey","UAE",
-            "Ukraine","United Kingdom","United States","Venezuela"
-    };
-    //List for catagory combobox
-    public final static String[] catagoryArray = {
-            "business","entertainment","general","health","science","sports","technology",
-    };
-
-    //List for Language combobox
-    public final static String[] languageArray = {
-            "Arabic", "German","English","Spanish","French","Hebrew","Italian","Dutch","Norwegian","Portuguese", "Russian","Swedish","Universal Dependencies","Chinese"
-    };
 
     //Hashmap for language to its code
     public static final Map<String, String> languageMap = new HashMap<>();

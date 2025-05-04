@@ -1,6 +1,5 @@
 package com.csci212.finalproject;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
