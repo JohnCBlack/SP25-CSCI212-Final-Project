@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="295.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.SettingsController">
+<AnchorPane prefHeight="273.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.SettingsController">
    <Label layoutX="240.0" layoutY="14.0" text="Settings">
       <font>
          <Font name="Arial" size="20.0" />
@@ -20,7 +20,7 @@
       </font>
    </Text>
    <TextField fx:id="zipCode" layoutX="100.0" layoutY="57.0" prefHeight="25.0" prefWidth="436.0" promptText="Please enter Zip code" />
-   <Button fx:id="saveButton" layoutX="235.0" layoutY="241.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="35.0" prefWidth="82.0" text="Save" />
+   <Button fx:id="saveButton" layoutX="236.0" layoutY="224.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="35.0" prefWidth="82.0" text="Save" />
    <Label layoutX="18.0" layoutY="101.0" text="Stocks:">
       <font>
          <Font name="Arial" size="18.0" />
