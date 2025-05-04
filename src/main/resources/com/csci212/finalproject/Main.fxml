@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="660.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.MainController">
+<AnchorPane prefHeight="660.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.MainController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="13.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="289.0" />
       <Text layoutX="261.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Personal Recap" wrappingWidth="225.13671875">
@@ -63,6 +67,6 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="newsTextArea" layoutX="24.0" layoutY="264.0" prefHeight="346.0" prefWidth="697.0" />
+      <ScrollPane fx:id="newsTextArea" layoutX="30.0" layoutY="243.0" prefHeight="365.0" prefWidth="688.0" />
    </children>
 </AnchorPane>

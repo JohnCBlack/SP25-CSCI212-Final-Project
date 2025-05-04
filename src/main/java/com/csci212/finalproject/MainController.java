@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,7 +32,7 @@ public class MainController implements Initializable {
     @FXML
     public Label newsRectangleLabel;
     @FXML
-    public Rectangle newsRectangle;
+    public ScrollPane newsRectangle;
     @FXML
     private Label conditionLabel;
     @FXML
