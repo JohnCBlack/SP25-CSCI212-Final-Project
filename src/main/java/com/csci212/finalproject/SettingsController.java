@@ -100,32 +100,6 @@ public class SettingsController implements Initializable {
         countryMap.put("Venezuela","ve");
     }
 
-    // Language Box
-    @FXML
-    private ComboBox<String> languageBox;
-    ObservableList<String> language = FXCollections.observableArrayList(
-            "Arabic", "German","English","Spanish","French","Hebrew","Italian","Dutch","Norwegian",
-            "Portuguese", "Russian","Swedish","Universal Dependencies","Chinese"
-    );
-    //Hashmap for language to its code
-    public static final Map<String, String> languageMap = new HashMap<>();
-    static {
-        languageMap.put("Arabic","ar");
-        languageMap.put("German","de");
-        languageMap.put("English","en");
-        languageMap.put("Spanish", "es");
-        languageMap.put("French", "fr");
-        languageMap.put("Hebrew", "he");
-        languageMap.put("Italian","it");
-        languageMap.put("Dutch","nl");
-        languageMap.put("Norwegian","no");
-        languageMap.put("Portuguese","pt");
-        languageMap.put("Russian","ru");
-        languageMap.put("Swedish","sv");
-        languageMap.put("Universal Dependencies", "ud");
-        languageMap.put("Chinese","zh");
-    }
-
     //Category box
     @FXML
     private ComboBox<String> categoryBox;
@@ -144,8 +118,6 @@ public class SettingsController implements Initializable {
             );
             return;
         }
-
-        //String newsLanguage = languageMap.get(languageBox.getValue());
 
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
@@ -180,7 +152,6 @@ public class SettingsController implements Initializable {
         });
 
         categoryBox.setItems(category);
-        languageBox.setItems(language);
         newsCountryBox.setItems(country);
 
     }
