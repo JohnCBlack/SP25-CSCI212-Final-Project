@@ -9,9 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -26,7 +26,7 @@ public class MainController implements Initializable {
     private weatherAPICall weather; // Keep separate for setting page
 
     @FXML
-    public TextArea newsTextArea;
+    public TextFlow newsTextFlow;
     @FXML
     private Label conditionLabel;
     @FXML
