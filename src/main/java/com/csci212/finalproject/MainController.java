@@ -7,17 +7,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -26,7 +26,7 @@ public class MainController implements Initializable {
     private weatherAPICall weather; // Keep separate for setting page
 
     @FXML
-    public TextFlow newsTextFlow;
+    public VBox newsTextBox;
     @FXML
     private Label conditionLabel;
     @FXML
@@ -40,6 +40,7 @@ public class MainController implements Initializable {
     @FXML
     private Label changeOfPercp;
 
+    //Settings
     @FXML
     private Button settingsButton;
     private void settingsButtonPressed(ActionEvent event) throws IOException {
@@ -55,6 +56,27 @@ public class MainController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         weather = new weatherAPICall();
         news = new NewsAPICall();
+        news.getNewsHeadline();
+
+        for (ArrayList<String> article : news.articlesList) {
+            String title = article.get(0);  // title is at index 0
+            String url = article.get(3);    // url is at index 3
+
+            Hyperlink link = new Hyperlink(title);
+            link.setWrapText(true);
+            link.setOnAction(e -> {
+                try {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            newsTextBox.getChildren().add(link);
+            newsTextBox.getChildren().add(new Label(article.get(1)));
+            newsTextBox.getChildren().add(new Label(article.get(2)));
+        }
+
+
 
         try {
             Image settingsIcon = new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/settings-icon.png"));
