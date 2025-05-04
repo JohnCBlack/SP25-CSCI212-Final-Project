@@ -19,6 +19,8 @@ import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -29,7 +31,7 @@ public class SettingsController implements Initializable {
     @FXML
     private TextField newsTextBox;
 
-    //Populate combo box with API country list
+    //Country box
     @FXML
     private ComboBox<String> newsCountryBox;
     public final static String[] countryArray = {
@@ -41,6 +43,65 @@ public class SettingsController implements Initializable {
     };
     ObservableList<String> country = FXCollections.observableArrayList(countryArray);
 
+    //Hashmap of all countries that are offered by the API
+    public static final Map<String, String> countryMap = new HashMap<>();
+    static {
+        countryMap.put("Argentina", "ar");
+        countryMap.put("Australia", "au");
+        countryMap.put("Austria", "at");
+        countryMap.put("Belgium", "be");
+        countryMap.put("Brazil","br");
+        countryMap.put("Canada", "ca");
+        countryMap.put("China","cn");
+        countryMap.put("Colombia", "co");
+        countryMap.put("Cuba","cu");
+        countryMap.put("Czech Republic", "cz");
+        countryMap.put("Egypt","eg");
+        countryMap.put("France","fr");
+        countryMap.put("Germany", "de");
+        countryMap.put("Greece", "gr");
+        countryMap.put("Hong Kong", "hk");
+        countryMap.put("Hungary", "hu");
+        countryMap.put("India", "in");
+        countryMap.put("Indonesia", "id");
+        countryMap.put("Ireland", "ir");
+        countryMap.put("Israel","il");
+        countryMap.put("Italy","it");
+        countryMap.put("Japan", "jp");
+        countryMap.put("Latvia", "lv");
+        countryMap.put("Lithuania", "lt");
+        countryMap.put("Malaysia","my");
+        countryMap.put("Mexico", "mx");
+        countryMap.put("Morocco", "ma");
+        countryMap.put("Netherlands","nl");
+        countryMap.put("New Zealand", "nz");
+        countryMap.put("Nigeria","ng");
+        countryMap.put("Norway","no");
+        countryMap.put("Philippines","ph");
+        countryMap.put("Poland", "pl");
+        countryMap.put("Portugal", "pt");
+        countryMap.put("Romania", "ro");
+        countryMap.put("Russia","ru");
+        countryMap.put("Saudi Arabia", "sa");
+        countryMap.put("Serbia","rs");
+        countryMap.put("Singapore","sg");
+        countryMap.put("Slovakia","sl");
+        countryMap.put("Slovenia", "si");
+        countryMap.put("South Africa","za");
+        countryMap.put("South Korea","kr");
+        countryMap.put("Sweden", "se");
+        countryMap.put("Switzerland", "ch");
+        countryMap.put("Taiwan","tw");
+        countryMap.put("Thailand","th");
+        countryMap.put("Turkey","tr");
+        countryMap.put("UAE","ae");
+        countryMap.put("Ukraine","ua");
+        countryMap.put("United Kingdom","gb");
+        countryMap.put("United States","us");
+        countryMap.put("Venezuela","ve");
+    }
+
+    // Language Box
     @FXML
     private ComboBox<String> languageBox;
     public final static String[] languageArray = {
@@ -48,6 +109,7 @@ public class SettingsController implements Initializable {
     };
     ObservableList<String> language = FXCollections.observableArrayList(languageArray);
 
+    //Category box
     @FXML
     private ComboBox<String> categoryBox;
     public final static String[] categoryArray = {
@@ -55,6 +117,7 @@ public class SettingsController implements Initializable {
     };
     ObservableList<String> category = FXCollections.observableArrayList(categoryArray);
 
+    //Save
     @FXML
     private Button saveButton;
 
@@ -66,6 +129,9 @@ public class SettingsController implements Initializable {
             );
             return;
         }
+
+        String newsCountry = countryMap.get(newsCountryBox.getValue());
+
 
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
