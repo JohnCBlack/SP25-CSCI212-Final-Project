@@ -29,9 +29,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        //This is the NewsAPI Call! To make it go to the display box just change the system.out.print"...." to the box you want.
-//        NewsAPICall call = new NewsAPICall();
-//        call.getNewsHeadline("general", "us");
+        //This is the NewsAPI Call! To make it go to the display box just change the system.out.print"...." to the box you want.
+        //NewsAPICall call = new NewsAPICall();
+        //call.getNewsHeadline("", "us");
 
         launch();
 

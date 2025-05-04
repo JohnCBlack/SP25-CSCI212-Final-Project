@@ -6,15 +6,17 @@ import org.json.simple.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-
+import java.util.ArrayList;
 
 
 public class NewsAPICall extends APICall{
     private String keyWord,category,country,language;
+    public ArrayList<String> articlesList = new ArrayList<>();
 
     //Possibly a dropdown to give a list of sources
     //GET https://newsapi.org/v2/everything?q=Apple&from=2025-04-18&sortBy=popularity&apiKey=API_KEY
     // GET https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
+    public ArrayList<String> getArticles(){return articlesList;}
 
     public void getNewsHeadline(String category, String country) {
         this.category = category;
@@ -29,6 +31,7 @@ public class NewsAPICall extends APICall{
         processData(urlStr);
     }
 
+    /**
     public void getNewsKeyWord(String keyWord, String language) {
         this.keyWord = keyWord;
         this.language = language;
@@ -40,6 +43,7 @@ public class NewsAPICall extends APICall{
 
         processData(urlStr);
     }
+    **/
 
     private void processData(String urlStr) {
         try {
@@ -66,12 +70,20 @@ public class NewsAPICall extends APICall{
                     //TODO. Make an array of articles to sent over to the controller YOU CAN NOT EFFECT THE FXML FROM THIS CLASS DIRECTLY!!!!
                     //newsTextArea.appendText(String.format("%s\n%s\n%s\n%s\n",title, author, description, link));
 
-                    //Display
+                    String articleString = String.format("%s\n%s\n%s\n%s\n",title, author, description, link);
+                    articlesList.add(articleString);
+
+                    /**Display
                     System.out.println("Title: " + title);
                     System.out.println("Author: " + author);
                     System.out.println("Description: " + description);
                     System.out.println("URL: " + link);
                     System.out.println("---------------------------------------");
+                     **/
+                }
+
+                for (String item : articlesList){
+                    System.out.println(item);
                 }
 
             } else {
