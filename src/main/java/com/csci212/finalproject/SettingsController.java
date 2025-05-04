@@ -34,14 +34,14 @@ public class SettingsController implements Initializable {
     //Country box
     @FXML
     private ComboBox<String> newsCountryBox;
-    public final static String[] countryArray = {
-            "Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","China","Columbia","Cuba","Czech",
-            "Egypt","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan",
-            "Latvia", "Lithuania","Malaysia","Mexico","Morocco","Netherlands","New Zealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania",
-            "Russia","Saudi Arabia","Serbia","Singapore","Slovakia","Slovenia","South Africa","South Korea","Sweden","Switzerland","Taiwan","Thailand","Turkey","UAE",
-            "Ukraine","United Kingdom","United States","Venezuela"
-    };
-    ObservableList<String> country = FXCollections.observableArrayList(countryArray);
+    ObservableList<String> country = FXCollections.observableArrayList(
+    "Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","China","Columbia","Cuba","Czech",
+        "Egypt","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan",
+        "Latvia", "Lithuania","Malaysia","Mexico","Morocco","Netherlands","New Zealand","Nigeria","Norway","Philippines",
+        "Poland","Portugal","Romania","Russia","Saudi Arabia","Serbia","Singapore","Slovakia","Slovenia","South Africa",
+        "South Korea","Sweden","Switzerland","Taiwan","Thailand","Turkey","UAE", "Ukraine","United Kingdom",
+        "United States","Venezuela"
+    );
 
     //Hashmap of all countries that are offered by the API
     public static final Map<String, String> countryMap = new HashMap<>();
@@ -104,18 +104,18 @@ public class SettingsController implements Initializable {
     // Language Box
     @FXML
     private ComboBox<String> languageBox;
-    public final static String[] languageArray = {
-            "Arabic", "German","English","Spanish","French","Hebrew","Italian","Dutch","Norwegian","Portuguese", "Russian","Swedish","Universal Dependencies","Chinese"
-    };
-    ObservableList<String> language = FXCollections.observableArrayList(languageArray);
+
+    ObservableList<String> language = FXCollections.observableArrayList(
+            "Arabic", "German","English","Spanish","French","Hebrew","Italian","Dutch","Norwegian",
+            "Portuguese", "Russian","Swedish","Universal Dependencies","Chinese"
+    );
 
     //Category box
     @FXML
     private ComboBox<String> categoryBox;
-    public final static String[] categoryArray = {
-            "business","entertainment","general","health","science","sports","technology",
-    };
-    ObservableList<String> category = FXCollections.observableArrayList(categoryArray);
+    ObservableList<String> category = FXCollections.observableArrayList(
+        "Business","Entertainment","General","Health","Science","Sports","Technology"
+    );
 
     //Save
     @FXML
@@ -135,6 +135,7 @@ public class SettingsController implements Initializable {
 
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
+        settings.put("newsCountry", newsCountry);
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
