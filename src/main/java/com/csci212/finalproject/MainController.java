@@ -45,12 +45,12 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        Image weathericon = new Image(
+        Image weatherIconLink = new Image(
                 String.format("http:%s", weather.getIcon())
         );
 
         conditionLabel.setText(weather.getCondition());
-        weatherIcon.setImage(weathericon); //set image
+        weatherIcon.setImage(weatherIconLink); //set image
         currentTemp.setText(
                 String.format("%.1f°F", weather.getCurrentTemp())
         );
