@@ -28,9 +28,6 @@ public class SettingsController implements Initializable {
     @FXML
     private TextField zipCode;
 
-    @FXML
-    private TextField newsTextBox;
-
     //Country box
     @FXML
     private ComboBox<String> newsCountryBox;
