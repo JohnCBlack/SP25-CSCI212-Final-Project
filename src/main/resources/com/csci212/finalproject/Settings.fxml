@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -6,40 +8,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="447.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.SettingsController">
+<AnchorPane prefHeight="386.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.SettingsController">
    <Label layoutX="240.0" layoutY="14.0" text="Settings">
       <font>
-         <Font name="Arial" size="20.0"/>
+         <Font name="Arial" size="20.0" />
       </font>
    </Label>
    <Text layoutX="26.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip Code:">
       <font>
-         <Font name="Arial" size="16.0"/>
+         <Font name="Arial" size="16.0" />
       </font>
    </Text>
-   <TextField fx:id="zipCode" layoutX="122.0" layoutY="57.0" prefHeight="25.0" prefWidth="331.0"
-              promptText="Please enter Zip code"/>
-   <Button fx:id="saveButton" layoutX="235.0" layoutY="363.0" mnemonicParsing="false" onAction="#saveSettings"
-           prefHeight="35.0" prefWidth="82.0" text="Save"/>
+   <TextField fx:id="zipCode" layoutX="122.0" layoutY="57.0" prefHeight="25.0" prefWidth="331.0" promptText="Please enter Zip code" />
+   <Button fx:id="saveButton" layoutX="235.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="35.0" prefWidth="82.0" text="Save" />
    <Label layoutX="31.0" layoutY="140.0" text="Stocks:">
       <font>
-         <Font name="Arial" size="18.0"/>
+         <Font name="Arial" size="18.0" />
       </font>
    </Label>
-   <Label layoutX="251.0" layoutY="236.0" text="News:">
+   <Label layoutX="251.0" layoutY="193.0" text="News:">
       <font>
-         <Font name="Arial" size="18.0"/>
+         <Font name="Arial" size="18.0" />
       </font>
    </Label>
-   <ComboBox fx:id="newsCountryBox" layoutX="95.0" layoutY="267.0" prefHeight="25.0" prefWidth="124.0"
-             promptText="Select Country"/>
-   <ComboBox fx:id="categoryBox" layoutX="317.0" layoutY="267.0" prefHeight="25.0" prefWidth="150.0"
-             promptText="Select Catagory"/>
-   <TextField layoutX="122.0" layoutY="138.0" prefHeight="25.0" prefWidth="331.0"
-              promptText="Enter stock tickers separated by a comma"/>
-   <ComboBox fx:id="languageBox" layoutX="317.0" layoutY="316.0" prefHeight="25.0" prefWidth="150.0"
-             promptText="Select a language"/>
-   <TextField fx:id="newsTextBox" layoutX="55.0" layoutY="316.0" prefHeight="25.0" prefWidth="164.0"
-              promptText="Enter a keyword for search"/>
+   <ComboBox fx:id="newsCountryBox" layoutX="95.0" layoutY="224.0" prefHeight="25.0" prefWidth="124.0" promptText="Select Country" />
+   <ComboBox fx:id="categoryBox" layoutX="317.0" layoutY="224.0" prefHeight="25.0" prefWidth="150.0" promptText="Select Catagory" />
+   <TextField layoutX="122.0" layoutY="138.0" prefHeight="25.0" prefWidth="331.0" promptText="Enter stock tickers separated by a comma" />
+   <ComboBox fx:id="languageBox" layoutX="317.0" layoutY="273.0" prefHeight="25.0" prefWidth="150.0" promptText="Select a language" />
+   <TextField fx:id="newsTextBox" layoutX="55.0" layoutY="273.0" prefHeight="25.0" prefWidth="164.0" promptText="Enter a keyword for search" />
 </AnchorPane>
