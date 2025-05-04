@@ -110,55 +110,16 @@ public class NewsAPICall extends APICall{
     //type 1 for news cite. Type 2 for general country
     public void getNewsHeadline(String category, String country) {
         this.category = category;
-        this. country = country;
+        this.country = country;
 
         setApiKey("NEWS_API_KEY");
-        String urlStr = "";
 
-        String categoryParam = (category == null) ? "" : "category=" + category + "&";
-        String countryParam = (country == null) ? "" : "country=" + country + "&";
-        urlStr = String.format("https://newsapi.org/v2/top-headlines?%s%s%s",categoryParam ,countryParam,"apiKey="+APIKey);
+        String categoryParam = "category=" + category + "&";
+        String countryParam = "country=" + country + "&";
 
-        try {
-            URL url = new URI(urlStr).toURL();
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
+        String urlStr = String.format("https://newsapi.org/v2/top-headlines?%s%s%s",categoryParam ,countryParam,"apiKey="+APIKey);
 
-            int responseCode = connection.getResponseCode();
-
-            if (responseCode == 200) {
-                JSONObject inputStream = getDataStream(url);
-                JSONArray articles = (JSONArray) inputStream.get("articles");
-                System.out.println("Articles:\n");
-
-                for (Object articleObj : articles) {
-                    JSONObject article = (JSONObject) articleObj;
-                    //Get Details
-                    String title = (String) article.get("title");
-                    String author = (String) article.get("author");
-                    String description = (String) article.get("description");
-                    String link = (String) article.get("url");
-
-                    //TODO. Make an array of articles to sent over to the controller YOU CAN NOT EFFECT THE FXML FROM THIS CLASS DIRECTLY!!!!
-                    //newsTextArea.appendText(String.format("%s\n%s\n%s\n%s\n",title, author, description, link));
-
-                    //Display
-                    System.out.println("Title: " + title);
-                    System.out.println("Author: " + author);
-                    System.out.println("Description: " + description);
-                    System.out.println("URL: " + link);
-                    System.out.println("---------------------------------------");
-                }
-
-            } else {
-                System.out.println("Response Code" + responseCode);
-                System.out.println("Error in News API Call");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        processData(urlStr);
     }
 
 
@@ -171,6 +132,10 @@ public class NewsAPICall extends APICall{
         String languageParam = (language == null) ? "" : "language=" + language +"&";
         urlStr = String.format("https://newsapi.org/v2/everything?q=%s&%sapiKey=%s", this.keyWord,languageParam,APIKey);
 
+        processData(urlStr);
+    }
+
+    private void processData(String urlStr) {
         try {
             URL url = new URI(urlStr).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -210,7 +175,6 @@ public class NewsAPICall extends APICall{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 }
 
