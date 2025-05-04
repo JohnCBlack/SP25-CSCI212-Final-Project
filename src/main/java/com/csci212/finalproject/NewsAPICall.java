@@ -25,6 +25,23 @@ public class NewsAPICall extends APICall{
 
         setApiKey("NEWS_API_KEY");
 
+        JSONObject settingsStream = getJSONSettings();
+        assert settingsStream != null;
+
+        if (settingsStream.containsKey("newsCategory")) {
+            this.category = settingsStream.get("newsCategory").toString();
+        } else {
+            System.out.println("Error: No category specified in settings file.");
+        }
+
+        if (settingsStream.containsKey("newsCountry")) {
+            this.country = settingsStream.get("newsCountry").toString();
+        } else {
+            System.out.println("Error: No country specified in settings file.");
+        }
+    }
+
+    public void getNewsHeadline() {
         String urlStr = String.format("https://newsapi.org/v2/top-headlines?category=%s&country=%s&apiKey=%s",
                 category,country,APIKey
         );
