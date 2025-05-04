@@ -136,7 +136,6 @@ public class SettingsController implements Initializable {
     //Save
     @FXML
     private Button saveButton;
-
     public void saveSettings(ActionEvent event) throws IOException{
         String zipCodeText = zipCode.getText();
         if (!isValidZipCode(zipCodeText)) {
@@ -146,12 +145,14 @@ public class SettingsController implements Initializable {
             return;
         }
 
-        String newsCountry = countryMap.get(newsCountryBox.getValue());
         //String newsLanguage = languageMap.get(languageBox.getValue());
 
         JSONObject settings = new JSONObject();
         settings.put("zipCode", zipCode.getText());
+
+        String newsCountry = countryMap.get(newsCountryBox.getValue());
         settings.put("newsCountry", newsCountry);
+        settings.put("newsCategory", categoryBox.getValue());
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
