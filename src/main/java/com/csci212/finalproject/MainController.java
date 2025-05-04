@@ -29,10 +29,6 @@ public class MainController implements Initializable {
     @FXML
     public TextArea newsTextArea;
     @FXML
-    public Label newsRectangleLabel;
-    @FXML
-    public Rectangle newsRectangle;
-    @FXML
     private Label conditionLabel;
     @FXML
     private ImageView weatherIcon;
