@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,8 +15,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    private NewsAPICall news;
     private weatherAPICall weather; // Keep separate for setting page
 
+    @FXML
+    public TextArea newsTextArea;
+    @FXML
+    public Label newsRectangleLabel;
+    @FXML
+    public Rectangle newsRectangle;
     @FXML
     private Label conditionLabel;
     @FXML
@@ -27,13 +37,13 @@ public class MainController implements Initializable {
     private Label minTemp;
     @FXML
     private Label changeOfPercp;
-
     @FXML
     private Button settingsButton;
 
 
     public void initialize(URL arg0, ResourceBundle arg1) {
         weather = new weatherAPICall();
+        news = new NewsAPICall();
 
         try {
             Image settingsIcon = new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/settings-icon.png"));
@@ -63,5 +73,8 @@ public class MainController implements Initializable {
         changeOfPercp.setText(
                 String.format("%.1f%%", weather.getChangeOfRain())
         );
+
+
+
     }
 }
