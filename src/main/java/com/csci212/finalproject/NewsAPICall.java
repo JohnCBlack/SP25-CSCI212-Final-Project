@@ -36,10 +36,12 @@ public class NewsAPICall extends APICall{
     }
 
     public void getNewsHeadline() {
-        String urlStr = String.format("https://newsapi.org/v2/top-headlines?category=%s&country=%s&apiKey=%s",
-                getCategory(),getCountry(),APIKey
-        );
 
+        String urlStr = String.format("https://newsapi.org/v2/top-headlines?%scountry=%s&apiKey=%s",
+                getCategory() == null ? "" : "category="+getCategory()+"&"
+                ,getCountry()
+                ,APIKey
+        );
         processData(urlStr);
     }
 
