@@ -133,7 +133,10 @@ public class SettingsController implements Initializable {
 
         String newsCountry = countryMap.get(newsCountryBox.getValue());
         settings.put("newsCountry", newsCountry);
-        settings.put("newsCategory", categoryBox.getValue());
+
+        if (categoryBox.getValue() != null){        //This is part of letting the API call work if only a country is chosem.
+            settings.put("newsCategory", categoryBox.getValue());
+        }
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
