@@ -163,7 +163,9 @@ public class SettingsController implements Initializable {
         });
 
         categoryBox.setItems(category);
+        categoryBox.getSelectionModel().select("General");
         newsCountryBox.setItems(country);
+        newsCountryBox.getSelectionModel().select("United States");
 
     }
 
