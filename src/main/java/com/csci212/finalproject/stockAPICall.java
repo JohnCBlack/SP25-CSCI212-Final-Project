@@ -1,31 +1,4 @@
-package com.csci212.finalproject;/*
-link to docs: https://finnhub.io/docs/api/quote
-from docs + subscription info:
-"60 API calls/minute" w/ free plan
-"If your limit is exceeded, you will receive a response with status code 429."
-"On top of all plan's limit, there is a 30 API calls/ second limit." (should never be reached)
-
-i parse c (close) and o (open) for the percentage change calculation ^ rest of it is still displayed in console
-finnhub’s quote endpoint returns example:
-{
-  "c": 150.25, Current price (close)
-  "h": 152.10, High
-  "l": 149.80, Low
-  "o": 151.00, Open
-  "pc": 149.90, Previous close
-  "t": 1697059200 Timestamp
-}
-
-example of this codes output:
-
-Setting API Key
-Enter the stock symbol (e.g., AAPL, MSFT):
-AAPL
-Stock Data: {"c":199.74,"pc":193.16,"d":6.58,"t":1745352000,"h":201.59,"dp":3.4065,"l":195.97,"o":196.12}
-Previous Close: 193.16
-Current Price: 199.74
-Percent Change: 3.4065034%
- */
+package com.csci212.finalproject;
 
 import org.json.simple.JSONObject;
 
@@ -33,12 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
-
-/*
-uses finnhub api to fetch realtime stock data and calculate percentage change
-api key handling from config.env file
-calculates percentage change using previous close price for better accuracy like google does
- */
 
 public class stockAPICall extends APICall{
     // stores the API key to be used in requests
@@ -59,8 +26,6 @@ public class stockAPICall extends APICall{
 
 
         // --------- GUI implementation --------
-
-
         JSONObject settingsStream = getJSONSettings();
         assert settingsStream != null;
 

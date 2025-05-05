@@ -133,10 +133,9 @@ public class SettingsController implements Initializable {
 
         String newsCountry = countryMap.get(newsCountryBox.getValue());
         settings.put("newsCountry", newsCountry);
+        settings.put("newsCategory", categoryBox.getValue());
 
-        if (categoryBox.getValue() != null){        //This is part of letting the API call work if only a country is chosem.
-            settings.put("newsCategory", categoryBox.getValue());
-        }
+        settings.put("stockTicker", stockBox.getText().toUpperCase());
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
@@ -145,9 +144,6 @@ public class SettingsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String stockTicker = stockBox.getText();
-        settings.put("stockTicker", stockTicker);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
         Parent root = loader.load();
