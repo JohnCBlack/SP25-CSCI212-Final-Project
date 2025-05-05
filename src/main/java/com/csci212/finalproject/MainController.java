@@ -24,6 +24,7 @@ public class MainController implements Initializable {
 
     private NewsAPICall news;
     private weatherAPICall weather; // Keep separate for setting page
+    //private stockAPICall stocks;
 
     @FXML
     public VBox newsTextBox;
@@ -39,6 +40,22 @@ public class MainController implements Initializable {
     private Label minTemp;
     @FXML
     private Label changeOfPercp;
+    @FXML
+    private Label symbol;
+    @FXML
+    private Label currentPrice;
+    @FXML
+    private Label previousClosePrice;
+    @FXML
+    private Label change;
+    @FXML
+    private Label percentChange;
+    @FXML
+    private Label high;
+    @FXML
+    private Label low;
+    @FXML
+    private Label open;
 
     //Settings
     @FXML
@@ -51,7 +68,6 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
 
     public void initialize(URL arg0, ResourceBundle arg1) {
         weather = new weatherAPICall();
