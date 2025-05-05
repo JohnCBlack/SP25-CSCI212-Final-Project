@@ -24,7 +24,7 @@ public class MainController implements Initializable {
 
     private NewsAPICall news;
     private weatherAPICall weather; // Keep separate for setting page
-    //private stockAPICall stocks;
+    private stockAPICall stocks;
 
     @FXML
     public VBox newsTextBox;
@@ -73,6 +73,7 @@ public class MainController implements Initializable {
         weather = new weatherAPICall();
         news = new NewsAPICall();
         news.getNewsHeadline();
+        stocks = new stockAPICall();
 
         for (ArrayList<String> article : news.articlesList) {
             Hyperlink link = getHyperlink(article);
@@ -137,6 +138,29 @@ public class MainController implements Initializable {
         );
 
 
+
+        currentPrice.setText(
+                String.format("$%.2f", stocks.getCurrentPrice())
+        );
+        previousClosePrice.setText(
+                String.format("$%.2f", stocks.getPreviousClose())
+        );
+        change.setText(
+                String.format("$%.2f", stocks.getChange())
+        );
+        percentChange.setText(
+                String.format("%.2f%%", stocks.getPercentChange())
+        );
+        high.setText(
+                String.format("$%.2f", stocks.getHigh())
+        );
+        low.setText(
+                String.format("$%.2f", stocks.getLow())
+        );
+        open.setText(
+                String.format("$%.2f", stocks.getOpen())
+        );
+        symbol.setText(stocks.getStockTicker());
 
     }
 
