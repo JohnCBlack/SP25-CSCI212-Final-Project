@@ -144,8 +144,6 @@ public class MainController implements Initializable {
                 String.format("%.1f%%", weather.getChangeOfRain())
         );
 
-
-
         currentPrice.setText(
                 String.format("$%.2f", stocks.getCurrentPrice())
         );
