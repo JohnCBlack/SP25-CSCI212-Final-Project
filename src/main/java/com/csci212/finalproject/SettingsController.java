@@ -171,8 +171,8 @@ public class SettingsController implements Initializable {
 
     private boolean checkFields() {
         return !(zipCode.getText().isEmpty() ||
-                stockBox.getText().isEmpty() ||
-                newsCountryBox.getValue() == null);
+                stockBox.getText().isEmpty()
+        );
     }
 
     private boolean isValidZipCode(String zipCode) {
