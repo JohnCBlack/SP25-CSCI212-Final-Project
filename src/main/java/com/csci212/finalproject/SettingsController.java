@@ -146,6 +146,9 @@ public class SettingsController implements Initializable {
             e.printStackTrace();
         }
 
+        String stockTicker = stockBox.getText();
+        settings.put("stockTicker", stockTicker);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
