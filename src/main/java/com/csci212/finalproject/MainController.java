@@ -74,6 +74,9 @@ public class MainController implements Initializable {
         news = new NewsAPICall();
         news.getNewsHeadline();
 
+        if (news.articlesList.size() == 0) {
+            newsTextBox.getChildren().add(new Label("No news available by search criteria."));
+        }
         for (ArrayList<String> article : news.articlesList) {
             Hyperlink link = getHyperlink(article);
 

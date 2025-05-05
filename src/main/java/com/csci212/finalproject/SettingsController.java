@@ -132,7 +132,9 @@ public class SettingsController implements Initializable {
         settings.put("zipCode", zipCode.getText());
 
         String newsCountry = countryMap.get(newsCountryBox.getValue());
-        settings.put("newsCountry", newsCountry);
+            if (newsCountry != null){
+                settings.put("newsCountry", newsCountry);
+            } else { newsCountry = "us"; }
 
         if (categoryBox.getValue() != null){        //This is part of letting the API call work if only a country is chosem.
             settings.put("newsCategory", categoryBox.getValue());
