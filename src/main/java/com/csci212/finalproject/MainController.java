@@ -75,8 +75,12 @@ public class MainController implements Initializable {
         news.getNewsHeadline();
         stocks = new stockAPICall();
 
-        if (news.articlesList.size() == 0) {
-            newsTextBox.getChildren().add(new Label("No news available by search criteria."));
+        if (news.articlesList.isEmpty()) {
+            Label noNewsLabel = new Label("No news available by search criteria.");
+            noNewsLabel.setStyle("-fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 18; -fx-text-alignment: center; -fx-content-display: center;");
+            noNewsLabel.setMaxWidth(Double.MAX_VALUE);
+            noNewsLabel.setMaxHeight(Double.MAX_VALUE);
+            newsTextBox.getChildren().add(noNewsLabel);
         }
         for (ArrayList<String> article : news.articlesList) {
             Hyperlink link = getHyperlink(article);
