@@ -21,28 +21,34 @@ public class NewsAPICall extends APICall{
         assert settingsStream != null;
 
         if (settingsStream.containsKey("newsCategory")) {
-            this.category = settingsStream.get("newsCategory").toString();
+            setCategory(settingsStream.get("newsCategory").toString());
         } else {
-            System.out.println("Error: No category specified in settings file.");
+            logger.warning("Error: No category specified in settings file.");
+            setCategory(null);
         }
 
         if (settingsStream.containsKey("newsCountry")) {
-            this.country = settingsStream.get("newsCountry").toString();
+            setCountry(settingsStream.get("newsCountry").toString());
         } else {
-            System.out.println("Error: No country specified in settings file.");
+            logger.warning("Error: No country specified in settings file.");
+            setCategory(null);
         }
     }
 
     public void getNewsHeadline() {
-        String urlStr = String.format("https://newsapi.org/v2/top-headlines?%scountry=%s&apiKey=%s",
-                Objects.equals(getCategory(), "None") ? "" : "category="+getCategory()+"&",
-                getCountry(),
-                APIKey
-        );
+        if (getCategory() != null && getCountry() != null) {
+            String urlStr = String.format("https://newsapi.org/v2/top-headlines?%scountry=%s&apiKey=%s",
+                    Objects.equals(getCategory(), "None") ? "" : "category=" + getCategory() + "&",
+                    getCountry(),
+                    APIKey
+            );
 
-        System.out.println(urlStr);
+            System.out.println(urlStr);
 
-        processData(urlStr);
+            processData(urlStr);
+        } else {
+            logger.warning("Error: No category or country specified in settings file. API call aborted.");
+        }
     }
 
     private void processData(String urlStr) {
@@ -72,18 +78,21 @@ public class NewsAPICall extends APICall{
                     articlesList.add(articleToAdd);
                 }
             } else {
-                System.out.println("Response Code" + responseCode);
-                System.out.println("Error in News API Call");
+                logger.severe("Error getting API Data %nResponse Code: " + responseCode);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.severe("Error at news API call: " + e.getMessage());
         }
     }
 
     public String getCategory() {
         return category;
+    }  public void setCategory(String category) {
+        this.category = category;
     } public String getCountry() {
         return country;
+    } public void setCountry(String country) {
+        this.country = country;
     }
 }
 
