@@ -184,7 +184,7 @@ public class MainController implements Initializable {
         link.setWrapText(true);
         link.setOnAction(e -> {
             if (url == null || url.isEmpty()) {
-                System.out.println("Invalid URL: URL is empty or null");
+                logger.warning("Invalid URL: URL is empty or null");
                 return;
             }
 
@@ -193,18 +193,20 @@ public class MainController implements Initializable {
                 if (!java.awt.Desktop.isDesktopSupported() ||
                         !java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)
                 ) {
-                    System.out.println("Desktop browsing not supported on this platform");
+                    logger.warning("Desktop browsing not supported on this platform");
                     return;
                 }
 
                 java.awt.Desktop.getDesktop().browse(uri);
             } catch (java.net.URISyntaxException ex) {
-                ex.printStackTrace();
+                logger.severe("Invalid URI syntax: " + ex.getMessage());
             } catch (java.io.IOException ex) {
-                ex.printStackTrace();
+                logger.severe("Error opening browser: " + ex.getMessage());
             }
 
         });
         return link;
     }
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
 }

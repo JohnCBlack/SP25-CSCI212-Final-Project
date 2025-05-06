@@ -141,7 +141,7 @@ public class SettingsController implements Initializable {
             file.flush();
             System.out.println("Settings saved!");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe("Error writing to settings file: " + e.getMessage());
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
@@ -157,7 +157,7 @@ public class SettingsController implements Initializable {
             try {
                 saveSettings(event);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.severe("Error saving settings: " + e.getMessage());
             }
         });
 
@@ -185,4 +185,6 @@ public class SettingsController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SettingsController.class.getName());
 }
