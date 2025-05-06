@@ -35,11 +35,9 @@ public class stockAPICall extends APICall{
                     stockTickers[i] = (String) tickerArray.get(i);
                 }
             }
-//            setStockTicker(settingsStream.get("stockTicker").toString());
         } else {
             logger.warning("Error: No stock ticker specified in settings file.");
             stockTickers = null;
-//            setStockTicker(null);
         }
         // -------------------------------------
 
@@ -52,7 +50,6 @@ public class stockAPICall extends APICall{
                 }
             }
         }
-//       getStockData(stockTicker);  // fetch stock data for the symbol
     }
 
     /*
@@ -122,50 +119,4 @@ public class stockAPICall extends APICall{
     public String[] getStockTickers() {
         return stockTickers;
     }
-
-//    // Getters and Setters
-//    public void setPercentChange(float percentChange) {
-//        this.percentChange = percentChange;
-//    } public float getPercentChange() {
-//        return this.percentChange;
-//    }
-//    public void setCurrentPrice(float currentPrice) {
-//        this.currentPrice = currentPrice;
-//    } public float getCurrentPrice() {
-//        return this.currentPrice;
-//    }
-//
-//    // ------- changes for main page -------
-//    public void setPreviousClose(float previousClose) {
-//        this.previousClose = previousClose;
-//    } public float getPreviousClose() {
-//        return this.previousClose;
-//    }
-//    public void setChange(float change) {
-//        this.change = change;
-//    } public float getChange() {
-//        return this.change;
-//    }
-//    public void setHigh(float high) {
-//        this.high = high;
-//    } public float getHigh() {
-//        return this.high;
-//    }
-//    public void setLow(float low) {
-//        this.low = low;
-//    } public float getLow() {
-//        return this.low;
-//    }
-//    public void setOpen(float open) {
-//        this.open = open;
-//    } public float getOpen() {
-//        return this.open;
-//    }
-//    public void setStockTicker(String stockTicker) {
-//        this.stockTicker = stockTicker;
-//    } public String getStockTicker() {
-//        return this.stockTicker;
-//    }
-//
-//    // -------------------------------------
 }

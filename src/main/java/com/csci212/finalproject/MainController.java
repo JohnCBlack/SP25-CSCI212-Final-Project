@@ -179,37 +179,6 @@ public class MainController implements Initializable {
                 updateStockLabels(symbol2, currentPrice2, change2, percentChange2, stockArrow2, stockData);
             }
         }
-
-//        currentPrice.setText(
-//                String.format("$%.2f", stocks.getCurrentPrice())
-//        );
-//        change.setText(
-//                String.format("$%.2f", stocks.getChange())
-//        );
-//        percentChange.setText(
-//                String.format("%.2f%%", stocks.getPercentChange())
-//        );
-//        symbol.setText(stocks.getStockTicker());
-//
-//        if (stocks.getPercentChange() > 0) {
-//            try {
-//                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/greenArrow.png")));
-//            } catch (FileNotFoundException e) {
-//                throw new RuntimeException(e);
-//            }
-//            percentChange.setTextFill(Color.GREEN);
-//            change.setTextFill(Color.GREEN);
-//
-//        } else {
-//            try {
-//                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
-//            } catch (FileNotFoundException e) {
-//                throw new RuntimeException(e);
-//            }
-//            percentChange.setTextFill(Color.RED);
-//            change.setTextFill(Color.RED);
-//        }
-
     }
 
     private static Hyperlink getHyperlink(ArrayList<String> article) {
