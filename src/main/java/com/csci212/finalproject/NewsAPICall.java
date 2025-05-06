@@ -82,12 +82,8 @@ public class NewsAPICall extends APICall{
 
     public String getCategory() {
         return category;
-    } public void setCategory(String category) {
-        this.category = category;
     } public String getCountry() {
         return country;
-    } public void setCountry(String country) {
-        this.country = country;
     }
 }
 
