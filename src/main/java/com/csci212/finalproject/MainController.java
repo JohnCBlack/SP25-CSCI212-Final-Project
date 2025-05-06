@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -159,12 +160,17 @@ public class MainController implements Initializable {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
+            percentChange.setTextFill(Color.GREEN);
+            change.setTextFill(Color.GREEN);
+
         } else {
             try {
                 stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
+            percentChange.setTextFill(Color.RED);
+            change.setTextFill(Color.RED);
         }
 
     }
