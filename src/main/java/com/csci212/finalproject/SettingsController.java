@@ -15,8 +15,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -143,7 +141,7 @@ public class SettingsController implements Initializable {
             file.flush();
             System.out.println("Settings saved!");
         } catch (IOException e) {
-            logger.error("Error saving settings", e);
+            e.printStackTrace();
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
@@ -159,7 +157,7 @@ public class SettingsController implements Initializable {
             try {
                 saveSettings(event);
             } catch (IOException e) {
-                logger.error("Error saving settings", e);
+                e.printStackTrace();
             }
         });
 
@@ -179,8 +177,6 @@ public class SettingsController implements Initializable {
     private boolean isValidZipCode(String zipCode) {
         return zipCode != null && zipCode.matches("\\d{5}(-\\d{4})?");
     }
-
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(SettingsController.class);
 
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

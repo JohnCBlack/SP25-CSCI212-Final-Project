@@ -12,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -186,7 +184,7 @@ public class MainController implements Initializable {
         link.setWrapText(true);
         link.setOnAction(e -> {
             if (url == null || url.isEmpty()) {
-                logger.error("Invalid URL: URL is empty or null");
+                System.out.println("Invalid URL: URL is empty or null");
                 return;
             }
 
@@ -195,20 +193,18 @@ public class MainController implements Initializable {
                 if (!java.awt.Desktop.isDesktopSupported() ||
                         !java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)
                 ) {
-                    logger.error("Desktop browsing not supported on this platform");
+                    System.out.println("Desktop browsing not supported on this platform");
                     return;
                 }
 
                 java.awt.Desktop.getDesktop().browse(uri);
             } catch (java.net.URISyntaxException ex) {
-                logger.error("Invalid URL format", ex);
+                ex.printStackTrace();
             } catch (java.io.IOException ex) {
-                logger.error("Error opening browser", ex);
+                ex.printStackTrace();
             }
 
         });
         return link;
     }
-
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(MainController.class);
 }
