@@ -18,7 +18,6 @@ public class APICall {
     public JSONObject getDataStream(URL url) {
         try {
             Scanner scanner = new Scanner(url.openStream());
-
             StringBuilder responseBuilder = new StringBuilder();
 
             while (scanner.hasNext()) {
