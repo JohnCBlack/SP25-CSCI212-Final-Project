@@ -80,5 +80,13 @@
       <Label layoutX="309.0" layoutY="152.0" text="Percent Change:" />
       <Label fx:id="percentChange" layoutX="400.0" layoutY="152.0" text="dp" />
       <ImageView fx:id="stockArrow" fitHeight="41.0" fitWidth="40.0" layoutX="367.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="453.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Label layoutX="455.0" layoutY="102.0" text="Current Price:" />
+      <Label layoutX="455.0" layoutY="127.0" text="Change:" />
+      <Label layoutX="456.0" layoutY="152.0" text="Percent Change:" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="600.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Label layoutX="602.0" layoutY="102.0" text="Current Price:" />
+      <Label layoutX="602.0" layoutY="127.0" text="Change:" />
+      <Label layoutX="603.0" layoutY="152.0" text="Percent Change:" />
    </children>
 </AnchorPane>
