@@ -45,7 +45,7 @@ public class SettingsController implements Initializable {
         "United States","Venezuela"
     );
     //Hashmap of all countries that are offered by the API
-    public static final Map<String, String> countryMap = new HashMap<>();
+    private static final Map<String, String> countryMap = new HashMap<>();
     static {
         countryMap.put("Argentina", "ar");
         countryMap.put("Australia", "au");
@@ -112,7 +112,7 @@ public class SettingsController implements Initializable {
     //Save
     @FXML
     private Button saveButton;
-    public void saveSettings(ActionEvent event) throws IOException{
+    private void saveSettings(ActionEvent event) throws IOException{
         if (!checkFields()) { //Checks if all fields are filled
             showAlert("Empty Fields", "All fields must be input",
                     "Please fill in all fields."
