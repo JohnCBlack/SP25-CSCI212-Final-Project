@@ -85,6 +85,10 @@ public class NewsAPICall extends APICall{
         }
     }
 
+    public Boolean isNull (){
+        return getCategory() == null && getCountry() == null;
+    }
+
     public String getCategory() {
         return category;
     }  public void setCategory(String category) {
