@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -182,9 +184,11 @@ public class MainController implements Initializable {
             try {
                 java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.error("Error opening link to browser", ex);
             }
         });
         return link;
     }
+
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(MainController.class);
 }
