@@ -7,14 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class NewsAPICall extends APICall{
     private String category,country;
     public ArrayList<ArrayList<String>> articlesList;
-
-    //GET https://newsapi.org/v2/everything?q=Apple&from=2025-04-18&sortBy=popularity&apiKey=API_KEY
-    // GET https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
 
     public NewsAPICall() {
         setApiKey("NEWS_API_KEY");
@@ -37,10 +35,12 @@ public class NewsAPICall extends APICall{
 
     public void getNewsHeadline() {
         String urlStr = String.format("https://newsapi.org/v2/top-headlines?%scountry=%s&apiKey=%s",
-                getCategory() == null ? "" : "category="+getCategory()+"&",
+                Objects.equals(getCategory(), "None") ? "" : "category="+getCategory()+"&",
                 getCountry(),
                 APIKey
         );
+
+        System.out.println(urlStr);
 
         processData(urlStr);
     }

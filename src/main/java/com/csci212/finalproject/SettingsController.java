@@ -104,7 +104,7 @@ public class SettingsController implements Initializable {
     @FXML
     private ComboBox<String> categoryBox;
     ObservableList<String> category = FXCollections.observableArrayList(
-        "Business","Entertainment","General","Health","Science","Sports","Technology"
+        "None","Business","Entertainment","General","Health","Science","Sports","Technology"
     );
 
     //Save
@@ -163,7 +163,7 @@ public class SettingsController implements Initializable {
         });
 
         categoryBox.setItems(category);
-        categoryBox.getSelectionModel().select("General");
+        categoryBox.getSelectionModel().select("None");
         newsCountryBox.setItems(country);
         newsCountryBox.getSelectionModel().select("United States");
 
