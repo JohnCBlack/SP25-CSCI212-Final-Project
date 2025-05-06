@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-
 public class SettingsController implements Initializable {
     //Zip code
     @FXML
@@ -111,6 +110,8 @@ public class SettingsController implements Initializable {
     //Save
     @FXML
     private Button saveButton;
+
+    @SuppressWarnings("unchecked")
     private void saveSettings(ActionEvent event) throws IOException{
         if (!checkFields()) { //Checks if all fields are filled
             showAlert("Empty Fields", "All fields must be input",
