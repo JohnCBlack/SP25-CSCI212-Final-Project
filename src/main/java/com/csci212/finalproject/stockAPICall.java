@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.Scanner;
 
 public class stockAPICall extends APICall{
     // stores the API key to be used in requests
@@ -18,19 +17,12 @@ public class stockAPICall extends APICall{
     public stockAPICall() {
         setApiKey("STOCK_API_KEY");  // loads the API key
 
-        // testing through console (for GUI implementation remove this part)
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter the stock symbol (e.g., AAPL, MSFT): ");
-//        String symbol = sc.next().toUpperCase();  // input for stock symbol
-
-
-
         // --------- GUI implementation --------
         JSONObject settingsStream = getJSONSettings();
         assert settingsStream != null;
 
         if (settingsStream.containsKey("stockTicker")) {
-            this.stockTicker = settingsStream.get("stockTicker").toString();
+            setStockTicker(settingsStream.get("stockTicker").toString());
         } else {
             System.out.println("Error: No stock ticker specified in settings file.");
         }
