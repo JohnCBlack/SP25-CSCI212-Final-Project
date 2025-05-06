@@ -49,20 +49,12 @@ public class MainController implements Initializable {
     private Label symbol;
     @FXML
     private Label currentPrice;
-//    @FXML
-//    private Label previousClosePrice;
     @FXML
     private Label change;
     @FXML
     private Label percentChange;
     @FXML
     private ImageView stockArrow;
-//    @FXML
-//    private Label high;
-//    @FXML
-//    private Label low;
-//    @FXML
-//    private Label open;
 
     //Settings
     @FXML
@@ -153,24 +145,12 @@ public class MainController implements Initializable {
         currentPrice.setText(
                 String.format("$%.2f", stocks.getCurrentPrice())
         );
-//        previousClosePrice.setText(
-//                String.format("$%.2f", stocks.getPreviousClose())
-//        );
         change.setText(
                 String.format("$%.2f", stocks.getChange())
         );
         percentChange.setText(
                 String.format("%.2f%%", stocks.getPercentChange())
         );
-//        high.setText(
-//                String.format("$%.2f", stocks.getHigh())
-//        );
-//        low.setText(
-//                String.format("$%.2f", stocks.getLow())
-//        );
-//        open.setText(
-//                String.format("$%.2f", stocks.getOpen())
-//        );
         symbol.setText(stocks.getStockTicker());
 
         if (stocks.getPercentChange() > 0) {
