@@ -24,7 +24,8 @@ public class stockAPICall extends APICall{
         if (settingsStream.containsKey("stockTicker")) {
             setStockTicker(settingsStream.get("stockTicker").toString());
         } else {
-            System.out.println("Error: No stock ticker specified in settings file.");
+            logger.warning("Error: No stock ticker specified in settings file.");
+            setStockTicker(null);
         }
         // -------------------------------------
 
@@ -35,50 +36,52 @@ public class stockAPICall extends APICall{
     ts method fetches stock data from Finnhub API and calculates percentage change
     */
     public void getStockData(String symbol) {
-        // constructing the Finnhub API URL with the stock symbol and API key
-        String urlStr = String.format(
-            "https://finnhub.io/api/v1/quote?symbol=%s&token=%s",
-            symbol, APIKey
-        );
+        if (getStockTicker() != null) {
+            // constructing the Finnhub API URL with the stock symbol and API key
+            String urlStr = String.format(
+                    "https://finnhub.io/api/v1/quote?symbol=%s&token=%s",
+                    symbol, APIKey
+            );
 
-        try {
-            // creating a connection to the API URL
-            URL url = new URI(urlStr).toURL();
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
+            try {
+                // creating a connection to the API URL
+                URL url = new URI(urlStr).toURL();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
 
-            // checking the response code from the API request
-            int responseCode = connection.getResponseCode();
+                // checking the response code from the API request
+                int responseCode = connection.getResponseCode();
 
-            if (responseCode == 200) {
-                JSONObject dataStream = getDataStream(url);
+                if (responseCode == 200) {
+                    JSONObject dataStream = getDataStream(url);
 
-                // parsing data from the response and calculating percentage change
-                if (dataStream.containsKey("c") && dataStream.containsKey("pc")) {
-                    setCurrentPrice(Float.parseFloat(dataStream.get("c").toString()));
+                    // parsing data from the response and calculating percentage change
+                    if (dataStream.containsKey("c") && dataStream.containsKey("pc")) {
+                        setCurrentPrice(Float.parseFloat(dataStream.get("c").toString()));
 
-                    // ------- changes for main page -------
-                    setPreviousClose(Float.parseFloat(dataStream.get("pc").toString()));
-                    setChange(Float.parseFloat(dataStream.get("d").toString()));
-                    setHigh(Float.parseFloat(dataStream.get("h").toString()));
-                    setLow(Float.parseFloat(dataStream.get("l").toString()));
-                    setOpen(Float.parseFloat(dataStream.get("o").toString()));
-                    // -------------------------------------
+                        // ------- changes for main page -------
+                        setPreviousClose(Float.parseFloat(dataStream.get("pc").toString()));
+                        setChange(Float.parseFloat(dataStream.get("d").toString()));
+                        setHigh(Float.parseFloat(dataStream.get("h").toString()));
+                        setLow(Float.parseFloat(dataStream.get("l").toString()));
+                        setOpen(Float.parseFloat(dataStream.get("o").toString()));
+                        // -------------------------------------
 
-                    setPercentChange(Float.parseFloat(dataStream.get("dp").toString()));
+                        setPercentChange(Float.parseFloat(dataStream.get("dp").toString()));
+                    } else {
+                        logger.severe("Error: Invalid stock symbol or no data available.");
+                    }
                 } else {
-                    System.out.println("Error: Invalid stock symbol or no data available.");
+                    logger.severe("Error getting API Data %nResponse Code: " + responseCode);
                 }
-            } else {
-                System.out.println("Response Code: " + responseCode);
-                System.out.println("Error fetching stock data.");
-            }
 
-        } catch (Exception e) {
-            // handling any exceptions that happen during the API call
-            System.out.println("Error at stock API call...");
-            System.out.println("Exception occurred: " + e.getMessage());
+            } catch (Exception e) {
+                // handling any exceptions that happen during the API call
+                logger.severe("Error at stock API call: " + e.getMessage());
+            }
+        } else {
+            logger.warning("Error: No stock ticker specified in settings file, API call aborted.");
         }
     }
 
