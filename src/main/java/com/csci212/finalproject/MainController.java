@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -50,17 +51,11 @@ public class MainController implements Initializable {
     @FXML
     private Label currentPrice;
     @FXML
-    private Label previousClosePrice;
-    @FXML
     private Label change;
     @FXML
     private Label percentChange;
     @FXML
-    private Label high;
-    @FXML
-    private Label low;
-    @FXML
-    private Label open;
+    private ImageView stockArrow;
 
     //Settings
     @FXML
@@ -152,25 +147,32 @@ public class MainController implements Initializable {
         currentPrice.setText(
                 String.format("$%.2f", stocks.getCurrentPrice())
         );
-        previousClosePrice.setText(
-                String.format("$%.2f", stocks.getPreviousClose())
-        );
         change.setText(
                 String.format("$%.2f", stocks.getChange())
         );
         percentChange.setText(
                 String.format("%.2f%%", stocks.getPercentChange())
         );
-        high.setText(
-                String.format("$%.2f", stocks.getHigh())
-        );
-        low.setText(
-                String.format("$%.2f", stocks.getLow())
-        );
-        open.setText(
-                String.format("$%.2f", stocks.getOpen())
-        );
         symbol.setText(stocks.getStockTicker());
+
+        if (stocks.getPercentChange() > 0) {
+            try {
+                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/greenArrow.png")));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            percentChange.setTextFill(Color.GREEN);
+            change.setTextFill(Color.GREEN);
+
+        } else {
+            try {
+                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            percentChange.setTextFill(Color.RED);
+            change.setTextFill(Color.RED);
+        }
 
     }
 
