@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -56,6 +57,26 @@ public class MainController implements Initializable {
     private Label percentChange;
     @FXML
     private ImageView stockArrow;
+    @FXML
+    private Label symbol1;
+    @FXML
+    private Label currentPrice1;
+    @FXML
+    private Label change1;
+    @FXML
+    private Label percentChange1;
+    @FXML
+    private ImageView stockArrow1;
+    @FXML
+    private Label symbol2;
+    @FXML
+    private Label currentPrice2;
+    @FXML
+    private Label change2;
+    @FXML
+    private Label percentChange2;
+    @FXML
+    private ImageView stockArrow2;
 
     //Settings
     @FXML
@@ -143,35 +164,50 @@ public class MainController implements Initializable {
                 String.format("%.1f%%", weather.getChangeOfRain())
         );
 
-        currentPrice.setText(
-                String.format("$%.2f", stocks.getCurrentPrice())
-        );
-        change.setText(
-                String.format("$%.2f", stocks.getChange())
-        );
-        percentChange.setText(
-                String.format("%.2f%%", stocks.getPercentChange())
-        );
-        symbol.setText(stocks.getStockTicker());
 
-        if (stocks.getPercentChange() > 0) {
-            try {
-                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/greenArrow.png")));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            percentChange.setTextFill(Color.GREEN);
-            change.setTextFill(Color.GREEN);
+        List<StockData> allStockData = stocks.getAllStockData();
 
-        } else {
-            try {
-                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+        for (int i = 0; i < allStockData.size(); i++) {
+            StockData stockData = allStockData.get(i);
+
+            if (i == 0) {
+                updateStockLabels(symbol, currentPrice, change, percentChange, stockArrow, stockData);
+            } else if (i == 1) {
+                updateStockLabels(symbol1, currentPrice1, change1, percentChange1, stockArrow1, stockData);
+            } else if (i == 2) {
+                updateStockLabels(symbol2, currentPrice2, change2, percentChange2, stockArrow2, stockData);
             }
-            percentChange.setTextFill(Color.RED);
-            change.setTextFill(Color.RED);
         }
+
+//        currentPrice.setText(
+//                String.format("$%.2f", stocks.getCurrentPrice())
+//        );
+//        change.setText(
+//                String.format("$%.2f", stocks.getChange())
+//        );
+//        percentChange.setText(
+//                String.format("%.2f%%", stocks.getPercentChange())
+//        );
+//        symbol.setText(stocks.getStockTicker());
+//
+//        if (stocks.getPercentChange() > 0) {
+//            try {
+//                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/greenArrow.png")));
+//            } catch (FileNotFoundException e) {
+//                throw new RuntimeException(e);
+//            }
+//            percentChange.setTextFill(Color.GREEN);
+//            change.setTextFill(Color.GREEN);
+//
+//        } else {
+//            try {
+//                stockArrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
+//            } catch (FileNotFoundException e) {
+//                throw new RuntimeException(e);
+//            }
+//            percentChange.setTextFill(Color.RED);
+//            change.setTextFill(Color.RED);
+//        }
 
     }
 
@@ -210,5 +246,32 @@ public class MainController implements Initializable {
         return link;
     }
 
+    private void updateStockLabels(Label symbolLabel, Label priceLabel, Label changeLabel, Label percentChangeLabel, ImageView arrow, StockData stockData) {
+        symbolLabel.setText(stockData.getSymbol());
+        priceLabel.setText(String.format("$%.2f", stockData.getCurrentPrice()));
+        changeLabel.setText(String.format("$%.2f", stockData.getChange()));
+        percentChangeLabel.setText(String.format("%.2f%%", stockData.getPercentChange()));
+
+        if (stockData.getPercentChange() > 0) {
+            try {
+                arrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/greenArrow.png")));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            percentChangeLabel.setTextFill(Color.GREEN);
+            changeLabel.setTextFill(Color.GREEN);
+
+        } else {
+            try {
+                arrow.setImage(new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/redArrow.png")));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            percentChangeLabel.setTextFill(Color.RED);
+            changeLabel.setTextFill(Color.RED);
+        }
+    }
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainController.class.getName());
 }
+

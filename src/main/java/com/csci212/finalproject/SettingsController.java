@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -135,7 +136,13 @@ public class SettingsController implements Initializable {
         settings.put("newsCountry", newsCountry);
         settings.put("newsCategory", categoryBox.getValue());
 
-        settings.put("stockTicker", stockBox.getText().toUpperCase());
+        String input = stockBox.getText().toUpperCase();
+        String[] tickers = input.split("\\s*,\\s*");
+        JSONArray tickerArray = new JSONArray();
+        for (String ticker : tickers) {
+            tickerArray.add(ticker);
+        }
+        settings.put("stockTicker", tickerArray);
 
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());

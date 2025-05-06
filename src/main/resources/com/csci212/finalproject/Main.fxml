@@ -71,22 +71,32 @@
       <ScrollPane fitToWidth="true" layoutX="23.0" layoutY="254.0" prefHeight="348.0" prefWidth="701.0">
          <VBox fx:id="newsTextBox" layoutX="-2.0" layoutY="-1.0" maxWidth="680" prefHeight="348.0" spacing="5" />
       </ScrollPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="306.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="306.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="141.0" />
       <Label fx:id="symbol" layoutX="318.0" layoutY="73.0" text="symbol" />
       <Label layoutX="308.0" layoutY="102.0" text="Current Price:" />
-      <Label fx:id="currentPrice" layoutX="387.0" layoutY="102.0" text="c" />
+      <Label fx:id="currentPrice" layoutX="387.0" layoutY="102.0" text="\$0.00" />
       <Label layoutX="308.0" layoutY="127.0" text="Change:" />
-      <Label fx:id="change" layoutX="387.0" layoutY="127.0" text="d" />
+      <Label fx:id="change" layoutX="387.0" layoutY="127.0" text="\$0.00" />
       <Label layoutX="309.0" layoutY="152.0" text="Percent Change:" />
-      <Label fx:id="percentChange" layoutX="400.0" layoutY="152.0" text="dp" />
+      <Label fx:id="percentChange" layoutX="400.0" layoutY="152.0" text="00.00%" />
       <ImageView fx:id="stockArrow" fitHeight="41.0" fitWidth="40.0" layoutX="367.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="453.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="453.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="141.0" />
       <Label layoutX="455.0" layoutY="102.0" text="Current Price:" />
       <Label layoutX="455.0" layoutY="127.0" text="Change:" />
       <Label layoutX="456.0" layoutY="152.0" text="Percent Change:" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="600.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="127.0" layoutX="600.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="141.0" />
       <Label layoutX="602.0" layoutY="102.0" text="Current Price:" />
       <Label layoutX="602.0" layoutY="127.0" text="Change:" />
       <Label layoutX="603.0" layoutY="152.0" text="Percent Change:" />
+      <Label fx:id="currentPrice1" layoutX="534.0" layoutY="102.0" text="\$0.00" />
+      <Label fx:id="change1" layoutX="534.0" layoutY="127.0" text="\$0.00" />
+      <Label fx:id="percentChange1" layoutX="547.0" layoutY="152.0" text="00.00%" />
+      <Label fx:id="currentPrice2" layoutX="681.0" layoutY="102.0" text="\$0.00" />
+      <Label fx:id="change2" layoutX="681.0" layoutY="127.0" text="\$0.00" />
+      <Label fx:id="percentChange2" layoutX="694.0" layoutY="152.0" text="00.00%" />
+      <Label fx:id="symbol1" layoutX="465.0" layoutY="73.0" text="symbol" />
+      <Label fx:id="symbol2" layoutX="609.0" layoutY="73.0" text="symbol" />
+      <ImageView fx:id="stockArrow1" fitHeight="41.0" fitWidth="40.0" layoutX="514.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="stockArrow2" fitHeight="41.0" fitWidth="40.0" layoutX="661.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
