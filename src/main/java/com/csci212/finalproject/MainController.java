@@ -181,11 +181,27 @@ public class MainController implements Initializable {
         link.setStyle("-fx-padding: 5 5 5 5;");
         link.setWrapText(true);
         link.setOnAction(e -> {
-            try {
-                java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-            } catch (Exception ex) {
-                logger.error("Error opening link to browser", ex);
+            if (url == null || url.isEmpty()) {
+                logger.error("Invalid URL: URL is empty or null");
+                return;
             }
+
+            try {
+                java.net.URI uri = new java.net.URI(url);
+                if (!java.awt.Desktop.isDesktopSupported() ||
+                        !java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)
+                ) {
+                    logger.error("Desktop browsing not supported on this platform");
+                    return;
+                }
+
+                java.awt.Desktop.getDesktop().browse(uri);
+            } catch (java.net.URISyntaxException ex) {
+                logger.error("Invalid URL format", ex);
+            } catch (java.io.IOException ex) {
+                logger.error("Error opening browser", ex);
+            }
+
         });
         return link;
     }
