@@ -28,8 +28,11 @@ public class MainController implements Initializable {
     private weatherAPICall weather; // Keep separate for setting page
     private stockAPICall stocks;
 
+    /* News Panel Components */
     @FXML
     public VBox newsTextBox;
+
+    /* Weather Panel Components */
     @FXML
     private Label conditionLabel;
     @FXML
@@ -42,6 +45,8 @@ public class MainController implements Initializable {
     private Label minTemp;
     @FXML
     private Label changeOfPercp;
+
+    /* Stock Panel Components */
     @FXML
     private Label symbol;
     @FXML
@@ -62,6 +67,7 @@ public class MainController implements Initializable {
     //Settings
     @FXML
     private Button settingsButton;
+
     private void settingsButtonPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
         Parent root = loader.load();
@@ -106,8 +112,6 @@ public class MainController implements Initializable {
             separator.setPrefWidth(680);
             newsTextBox.getChildren().add(separator);
         }
-
-
 
         try {
             Image settingsIcon = new Image(new FileInputStream("src/main/resources/com/csci212/finalproject/settings-icon.png"));
