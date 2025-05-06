@@ -97,34 +97,35 @@ public class MainController implements Initializable {
         news.getNewsHeadline();
         stocks = new stockAPICall();
 
-        if (news.articlesList.isEmpty()) {
+        if (news.articlesList == null || news.isNull()) {
             Label noNewsLabel = new Label("No news available by search criteria.");
             noNewsLabel.setStyle("-fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 18; -fx-text-alignment: center; -fx-content-display: center;");
             noNewsLabel.setMaxWidth(Double.MAX_VALUE);
             noNewsLabel.setMaxHeight(Double.MAX_VALUE);
             newsTextBox.getChildren().add(noNewsLabel);
-        }
-        for (ArrayList<String> article : news.articlesList) {
-            Hyperlink link = getHyperlink(article);
+        } else {
+            for (ArrayList<String> article : news.articlesList) {
+                Hyperlink link = getHyperlink(article);
 
-            Label author = new Label(article.get(1));
-            author.setWrapText(true);
-            author.setPrefWidth(680);
-            author.setStyle("-fx-padding: 0 5 0 5;");
+                Label author = new Label(article.get(1));
+                author.setWrapText(true);
+                author.setPrefWidth(680);
+                author.setStyle("-fx-padding: 0 5 0 5;");
 
-            Label description = new Label(article.get(2));
-            description.setWrapText(true);
-            description.setPrefWidth(680);
-            description.setStyle("-fx-padding: 0 5 5 5; -fx-font-style: italic;");
+                Label description = new Label(article.get(2));
+                description.setWrapText(true);
+                description.setPrefWidth(680);
+                description.setStyle("-fx-padding: 0 5 5 5; -fx-font-style: italic;");
 
 
-            newsTextBox.getChildren().add(link);
-            newsTextBox.getChildren().add(author);
-            newsTextBox.getChildren().add(description);
+                newsTextBox.getChildren().add(link);
+                newsTextBox.getChildren().add(author);
+                newsTextBox.getChildren().add(description);
 
-            Separator separator = new Separator();
-            separator.setPrefWidth(680);
-            newsTextBox.getChildren().add(separator);
+                Separator separator = new Separator();
+                separator.setPrefWidth(680);
+                newsTextBox.getChildren().add(separator);
+            }
         }
 
         try {

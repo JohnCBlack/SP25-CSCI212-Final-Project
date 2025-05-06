@@ -147,7 +147,6 @@ public class SettingsController implements Initializable {
         try (FileWriter file = new FileWriter("src/main/resources/com/csci212/finalproject/settings.json")) {
             file.write(settings.toJSONString());
             file.flush();
-            System.out.println("Settings saved!");
         } catch (IOException e) {
             logger.severe("Error writing to settings file: " + e.getMessage());
         }

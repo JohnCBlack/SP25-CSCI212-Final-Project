@@ -43,8 +43,6 @@ public class NewsAPICall extends APICall{
                     APIKey
             );
 
-            System.out.println(urlStr);
-
             processData(urlStr);
         } else {
             logger.warning("Error: No category or country specified in settings file. API call aborted.");
@@ -83,6 +81,10 @@ public class NewsAPICall extends APICall{
         } catch (Exception e) {
             logger.severe("Error at news API call: " + e.getMessage());
         }
+    }
+
+    public Boolean isNull (){
+        return getCategory() == null && getCountry() == null;
     }
 
     public String getCategory() {
