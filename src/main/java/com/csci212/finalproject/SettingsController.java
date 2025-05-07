@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -139,8 +140,12 @@ public class SettingsController implements Initializable {
         String input = stockBox.getText().toUpperCase();
         String[] tickers = input.split("\\s*,\\s*");
         JSONArray tickerArray = new JSONArray();
-        for (String ticker : tickers) {
-            tickerArray.add(ticker);
+        tickerArray.addAll(Arrays.asList(tickers));
+        if (tickerArray.size() >= 4){
+            showAlert("Too Many Tickers", "Too Many Tickers",
+                    "Please enter no more than 4 tickers."
+            );
+            return;
         }
         settings.put("stockTicker", tickerArray);
 
