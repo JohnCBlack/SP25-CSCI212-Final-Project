@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONArray;
@@ -36,7 +37,7 @@ public class DailyTasksController implements Initializable {
     @FXML 
     private VBox taskListVBox;
     
-    private static final String JSON_FILE = "daily_tasks.json";
+    private static final String JSON_FILE = "src/main/resources/com/csci212/finalproject/daily_tasks.json";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -45,7 +46,7 @@ public class DailyTasksController implements Initializable {
 
     @FXML
     private void handleBackToMain(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Main.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -67,7 +68,7 @@ public class DailyTasksController implements Initializable {
     private void handleClearAllCheckmarks() {
         for (Node node : taskListVBox.getChildren()) {
             if (node instanceof HBox taskContainer) {
-                CheckBox checkbox = (CheckBox) taskContainer.getChildren().get(0);
+                CheckBox checkbox = (CheckBox) taskContainer.getChildren().getFirst();
                 checkbox.setSelected(false);
             }
         }
