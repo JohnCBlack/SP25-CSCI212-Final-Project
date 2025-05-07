@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="660.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci212.finalproject.DailyTasksController">
+   <children>
+      <Button layoutX="649.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleBackToMain" text="Back to Main" />
+      <VBox fx:id="taskListVBox" layoutX="91.0" layoutY="146.0" prefHeight="438.0" prefWidth="567.0" style="-fx-background-color: rgb(255, 255, 255); -fx-padding: 10;" />
+      <Button layoutX="548.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleClearAllCheckmarks" text="Clear Checkmarks" />
+      <Text layoutX="235.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Task Check List" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="29.0" />
+         </font>
+      </Text>
+      <TextField fx:id="taskInputField" layoutX="91.0" layoutY="115.0" onAction="#handleAddItem" prefHeight="25.0" prefWidth="367.0" promptText="Add task to list..." />
+      <Button layoutX="465.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleAddItem" prefHeight="25.0" prefWidth="76.0" text="Add Task" />
+      <Line endX="325.0" layoutX="334.0" layoutY="79.0" startX="-245.0" />
+   </children>
+</AnchorPane>

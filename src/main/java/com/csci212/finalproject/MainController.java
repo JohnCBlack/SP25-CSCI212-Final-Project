@@ -1,19 +1,5 @@
 package com.csci212.finalproject;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +7,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
@@ -77,7 +80,8 @@ public class MainController implements Initializable {
     private Label percentChange2;
     @FXML
     private ImageView stockArrow2;
-
+    @FXML
+    private Button dailyTasksButton;
     //Settings
     @FXML
     private Button settingsButton;
@@ -88,6 +92,17 @@ public class MainController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void tasksButtonPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DailyTasks.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Daily Tasks");
         stage.show();
     }
 
@@ -146,6 +161,14 @@ public class MainController implements Initializable {
             }
         });
 
+        dailyTasksButton.setOnAction(event -> {
+            try {
+                tasksButtonPressed(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        
         Image weatherIconLink = new Image(
                 String.format("http:%s", weather.getIcon())
         );
